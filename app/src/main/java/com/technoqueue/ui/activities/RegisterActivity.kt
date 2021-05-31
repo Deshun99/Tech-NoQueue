@@ -13,7 +13,6 @@ import com.technoqueue.firestore.FirestoreClass
 import com.technoqueue.models.User
 import kotlinx.android.synthetic.main.activity_register.*
 
-// TODO Step 5: Replace the AppCompatActivity with BaseActivity to use the common function which we have created in the BaseActivity class.
 @Suppress("DEPRECATION")
 class RegisterActivity : BaseActivity() {
 
