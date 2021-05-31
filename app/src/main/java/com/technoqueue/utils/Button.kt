@@ -8,7 +8,7 @@ import androidx.appcompat.widget.AppCompatButton
 /**
  * This class will be used for Custom font text using the Button which inherits the AppCompatButton class.
  */
-class MSPButton(context: Context, attrs: AttributeSet) : AppCompatButton(context, attrs) {
+class Button(context: Context, attrs: AttributeSet) : AppCompatButton(context, attrs) {
 
     /**
      * The init block runs every time the class is instantiated.

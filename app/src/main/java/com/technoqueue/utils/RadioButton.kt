@@ -3,12 +3,13 @@ package com.technoqueue.utils
 import android.content.Context
 import android.graphics.Typeface
 import android.util.AttributeSet
-import androidx.appcompat.widget.AppCompatTextView
+import androidx.appcompat.widget.AppCompatRadioButton
 
 /**
- * This class will be used for Custom font text using the TextView which inherits the AppCompatTextView class.
+ * This class will be used for Custom font text using the Radio Button which inherits the AppCompatRadioButton class.
  */
-class MSPTextView(context: Context, attrs: AttributeSet) : AppCompatTextView(context, attrs) {
+class RadioButton(context: Context, attrs: AttributeSet) :
+    AppCompatRadioButton(context, attrs) {
 
     /**
      * The init block runs every time the class is instantiated.
@@ -19,14 +20,13 @@ class MSPTextView(context: Context, attrs: AttributeSet) : AppCompatTextView(con
     }
 
     /**
-     * Applies a font to a TextView.
+     * Applies a font to a Radio Button.
      */
     private fun applyFont() {
 
         // This is used to get the file from the assets folder and set it to the title textView.
         val typeface: Typeface =
-            Typeface.createFromAsset(context.assets, "Montserrat-Regular.ttf")
+            Typeface.createFromAsset(context.assets, "Montserrat-Bold.ttf")
         setTypeface(typeface)
-
     }
 }

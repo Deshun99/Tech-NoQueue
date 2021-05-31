@@ -6,9 +6,9 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
 
 /**
- * This class will be used for Custom bold text using the TextView which inherits the AppCompactTextView class.
+ * This class will be used for Custom font text using the TextView which inherits the AppCompatTextView class.
  */
-class MSPTextViewBold(context: Context, attrs: AttributeSet) : AppCompatTextView(context, attrs) {
+class TextView(context: Context, attrs: AttributeSet) : AppCompatTextView(context, attrs) {
 
     /**
      * The init block runs every time the class is instantiated.
@@ -25,7 +25,8 @@ class MSPTextViewBold(context: Context, attrs: AttributeSet) : AppCompatTextView
 
         // This is used to get the file from the assets folder and set it to the title textView.
         val typeface: Typeface =
-            Typeface.createFromAsset(context.assets, "Montserrat-Bold.ttf")
+            Typeface.createFromAsset(context.assets, "Montserrat-Regular.ttf")
         setTypeface(typeface)
+
     }
 }

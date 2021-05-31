@@ -3,13 +3,12 @@ package com.technoqueue.utils
 import android.content.Context
 import android.graphics.Typeface
 import android.util.AttributeSet
-import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatTextView
 
 /**
- * This class will be used for Custom font text using the EditText which inherits the AppCompatEditText class.
+ * This class will be used for Custom bold text using the TextView which inherits the AppCompactTextView class.
  */
-class MSPEditText(context: Context, attrs: AttributeSet) : AppCompatEditText(context, attrs) {
+class TextViewBold(context: Context, attrs: AttributeSet) : AppCompatTextView(context, attrs) {
 
     /**
      * The init block runs every time the class is instantiated.
@@ -20,12 +19,13 @@ class MSPEditText(context: Context, attrs: AttributeSet) : AppCompatEditText(con
     }
 
     /**
-     * Applies a font to a EditText.
+     * Applies a font to a TextView.
      */
     private fun applyFont() {
+
         // This is used to get the file from the assets folder and set it to the title textView.
         val typeface: Typeface =
-            Typeface.createFromAsset(context.assets, "Montserrat-Regular.ttf")
+            Typeface.createFromAsset(context.assets, "Montserrat-Bold.ttf")
         setTypeface(typeface)
     }
 }

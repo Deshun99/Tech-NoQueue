@@ -7,7 +7,7 @@
     android:background="@drawable/img_splash_background"
     tools:context="com.technoqueue.ui.activities.SplashActivity">
 
-    <com.technoqueue.utils.MSPTextViewBold
+    <com.technoqueue.utils.TextViewBold
         android:id="@+id/tv_app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
