@@ -1,23 +1,19 @@
 package com.technoqueue.ui.activities
 
 import android.app.Dialog
+import android.os.Handler
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.technoqueue.R
 import kotlinx.android.synthetic.main.dialog_progress.*
 
-/**
- * A base activity class is used to define the functions and members which we will use in all the activities.
- * It inherits the AppCompatActivity class so in other activity class we will replace the AppCompatActivity with BaseActivity.
- */
 open class BaseActivity : AppCompatActivity() {
 
+    private var doubleBackToExitPressedOnce = false
     private lateinit var mProgressDialog: Dialog
 
-    /**
-     * A function to show the success and error messages in snack bar component.
-     */
     fun showErrorSnackBar(message: String, errorMessage: Boolean) {
         val snackBar =
             Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG)
@@ -55,5 +51,24 @@ open class BaseActivity : AppCompatActivity() {
 
     fun hideProgressDialog() {
         mProgressDialog.dismiss()
+    }
+
+    fun doubleBackToExit() {
+
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed()
+            return
+        }
+
+        this.doubleBackToExitPressedOnce = true
+
+        Toast.makeText(
+            this,
+            resources.getString(R.string.please_click_back_again_to_exit),
+            Toast.LENGTH_SHORT
+        ).show()
+
+        @Suppress("DEPRECATION")
+        Handler().postDelayed({ doubleBackToExitPressedOnce = false }, 2000)
     }
 }

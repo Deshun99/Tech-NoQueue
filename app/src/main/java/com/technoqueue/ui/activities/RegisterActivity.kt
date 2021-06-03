@@ -16,16 +16,11 @@ import kotlinx.android.synthetic.main.activity_register.*
 @Suppress("DEPRECATION")
 class RegisterActivity : BaseActivity() {
 
-    /**
-     * This function is auto created by Android when the Activity Class is created.
-     */
     override fun onCreate(savedInstanceState: Bundle?) {
-        //This call the parent constructor
+
         super.onCreate(savedInstanceState)
-        // This is used to align the xml view to this class
         setContentView(R.layout.activity_register)
 
-        // This is used to hide the status bar and make the splash screen as a full screen activity.
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
@@ -42,9 +37,6 @@ class RegisterActivity : BaseActivity() {
         }
     }
 
-    /**
-     * A function for actionBar Setup.
-     */
     private fun setupActionBar() {
 
         setSupportActionBar(toolbar_register_activity)
@@ -58,9 +50,6 @@ class RegisterActivity : BaseActivity() {
         toolbar_register_activity.setNavigationOnClickListener { onBackPressed() }
     }
 
-    /**
-     * A function to validate the entries of a new user.
-     */
     private fun validateRegisterDetails(): Boolean {
         return when {
             TextUtils.isEmpty(et_first_name.text.toString().trim { it <= ' ' }) -> {
@@ -137,7 +126,6 @@ class RegisterActivity : BaseActivity() {
     }
 
     fun userRegistrationSuccess() {
-        // Hide the progress dialog
         hideProgressDialog()
 
         Toast.makeText(
@@ -146,13 +134,8 @@ class RegisterActivity : BaseActivity() {
             Toast.LENGTH_SHORT
         ).show()
 
-
-        /**
-         * Here the new user registered is automatically signed-in so we just sign-out the user from firebase
-         * and send him to Intro Screen for Sign-In
-         */
         FirebaseAuth.getInstance().signOut()
-        // Finish the Register Screen
+
         finish()
     }
 }

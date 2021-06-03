@@ -3,9 +3,6 @@ package com.technoqueue.models
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
-/**
- * A data model class for User with required fields.
- */
 @Parcelize
 data class User(
     val id: String = "",

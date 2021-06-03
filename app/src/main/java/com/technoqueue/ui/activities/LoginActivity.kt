@@ -13,23 +13,14 @@ import com.technoqueue.models.User
 import com.technoqueue.utils.Constants
 import kotlinx.android.synthetic.main.activity_login.*
 
-/**
- * Login Screen of the application.
- */
 @Suppress("DEPRECATION")
 class LoginActivity : BaseActivity(), View.OnClickListener {
 
-    /**
-     * This function is auto created by Android when the Activity Class is created.
-     */
     override fun onCreate(savedInstanceState: Bundle?) {
-        //This call the parent constructor
+
         super.onCreate(savedInstanceState)
-        // This is used to align the xml view to this class
         setContentView(R.layout.activity_login)
 
-        // This is used to hide the status bar and make the login screen as a full screen activity.
-        // It is deprecated in the API level 30. I will update you with the alternate solution soon.
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
@@ -40,26 +31,17 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         btn_login.setOnClickListener(this)
 
         tv_register.setOnClickListener(this)
-
     }
 
     fun userLoggedInSuccess(user: User) {
-        // Hide the progress dialog.
         hideProgressDialog()
 
-        // Print the user details in the log as of now.
-        Log.i("First Name: ", user.firstName)
-        Log.i("Last Name: ", user.lastName)
-        Log.i("Email: ", user.email)
-
         if (user.profileCompleted == 0) {
-            // If the user profile is incomplete then launch the UserProfileActivity.
             val intent = Intent(this@LoginActivity, UserProfileActivity::class.java)
             intent.putExtra(Constants.EXTRA_USER_DETAILS, user)
             startActivity(intent)
         } else {
-            // Redirect the user to Main Screen after log in.
-            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+            startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))
         }
         finish()
     }
@@ -71,7 +53,6 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
                 R.id.tv_forgot_password -> {
                     startActivity(Intent(this@LoginActivity, ForgotPasswordActivity::class.java))
-
                 }
 
                 R.id.btn_login -> {
@@ -121,7 +102,6 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                         showErrorSnackBar(task.exception!!.message.toString(), true)
                     }
                 }
-
         }
     }
 }
