@@ -10,11 +10,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.technoqueue.models.Product
 import com.technoqueue.models.User
-import com.technoqueue.ui.activities.LoginActivity
-import com.technoqueue.ui.activities.RegisterActivity
-import com.technoqueue.ui.activities.SettingsActivity
-import com.technoqueue.ui.activities.UserProfileActivity
+import com.technoqueue.ui.activities.*
 import com.technoqueue.utils.Constants
 
 class FirestoreClass {
@@ -132,10 +130,10 @@ class FirestoreClass {
             }
     }
 
-    fun uploadImageToCloudStorage(activity: Activity, imageFileURI: Uri?) {
+    fun uploadImageToCloudStorage(activity: Activity, imageFileURI: Uri?, imageType: String) {
 
         val sRef: StorageReference = FirebaseStorage.getInstance().reference.child(
-            Constants.USER_PROFILE_IMAGE + System.currentTimeMillis() + "."
+            imageType + System.currentTimeMillis() + "."
                     + Constants.getFileExtension(
                 activity,
                 imageFileURI
@@ -157,6 +155,9 @@ class FirestoreClass {
                             is UserProfileActivity -> {
                                 activity.imageUploadSuccess(uri.toString())
                             }
+                            is AddProductActivity ->{
+                                activity.imageUploadSuccess(uri.toString())
+                            }
                         }
                     }
             }
@@ -166,12 +167,39 @@ class FirestoreClass {
                     is UserProfileActivity -> {
                         activity.hideProgressDialog()
                     }
+
+                    is AddProductActivity -> {
+                        activity.hideProgressDialog()
+                    }
                 }
 
                 Log.e(
                     activity.javaClass.simpleName,
                     exception.message,
                     exception
+                )
+            }
+    }
+
+    fun uploadProductDetails(activity: AddProductActivity, productInfo: Product) {
+
+        mFireStore.collection(Constants.PRODUCTS)
+            .document()
+            // Here the userInfo are Field and the SetOption is set to merge. It is for if we wants to merge
+            .set(productInfo, SetOptions.merge())
+            .addOnSuccessListener {
+
+                // Here call a function of base activity for transferring the result to it.
+                activity.productUploadSuccess()
+            }
+            .addOnFailureListener { e ->
+
+                activity.hideProgressDialog()
+
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while uploading the product details.",
+                    e
                 )
             }
     }

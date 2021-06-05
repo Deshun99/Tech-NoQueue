@@ -23,6 +23,10 @@ object Constants {
     const val FIRST_NAME: String = "firstName"
     const val LAST_NAME: String = "lastName"
     const val USER_PROFILE_IMAGE:String = "User_Profile_Image"
+    const val PRODUCT_IMAGE: String = "Product_Image"
+
+    const val PRODUCTS : String = "products"
+    const val TECHNOQUEUE_PREFERENCES: String = "TechNoQueuePrefs"
 
     fun showImageChooser(activity: Activity) {
 
