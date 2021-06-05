@@ -30,6 +30,8 @@ object Constants {
     const val PRODUCTS : String = "products"
     const val TECHNOQUEUE_PREFERENCES: String = "TechNoQueuePrefs"
 
+    const val EXTRA_PRODUCT_ID: String = "extra_product_id"
+
     fun showImageChooser(activity: Activity) {
 
         val galleryIntent = Intent(
