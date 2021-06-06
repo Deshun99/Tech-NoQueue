@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.technoqueue.R
 import com.technoqueue.firestore.FirestoreClass
 import com.technoqueue.models.Product
+import com.technoqueue.ui.activities.CartListActivity
 import com.technoqueue.ui.activities.ProductDetailsActivity
 import com.technoqueue.ui.activities.SettingsActivity
 import com.technoqueue.ui.adapters.DashboardItemsListAdapter
@@ -52,16 +53,20 @@ class DashboardFragment : BaseFragment() {
             R.id.action_settings -> {
 
                 startActivity(Intent(activity, SettingsActivity::class.java))
-
                 return true
             }
+
+            R.id.action_cart -> {
+                startActivity(Intent(activity, CartListActivity::class.java))
+                return true
+            }
+
         }
         return super.onOptionsItemSelected(item)
     }
 
     fun successDashboardItemsList(dashboardItemsList: ArrayList<Product>) {
 
-        // Hide the progress dialog.
         hideProgressDialog()
 
         if (dashboardItemsList.size > 0) {
@@ -79,6 +84,7 @@ class DashboardFragment : BaseFragment() {
                 override fun onClick(position: Int, product: Product) {
                     val intent = Intent(context, ProductDetailsActivity::class.java)
                     intent.putExtra(Constants.EXTRA_PRODUCT_ID, product.product_id)
+                    intent.putExtra(Constants.EXTRA_PRODUCT_OWNER_ID, product.user_id)
                     startActivity(intent)
                 }
             })
@@ -89,7 +95,6 @@ class DashboardFragment : BaseFragment() {
     }
 
     private fun getDashboardItemsList() {
-        // Show the progress dialog.
         showProgressDialog(resources.getString(R.string.please_wait))
 
         FirestoreClass().getDashboardItemsList(this@DashboardFragment)

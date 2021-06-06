@@ -41,22 +41,17 @@ open class MyProductsListAdapter (
             holder.itemView.tv_item_name.text = model.title
             holder.itemView.tv_item_price.text = "$${model.price}"
 
-            // TODO Step 4: Assigning the click event to the delete button.
-            // START
             holder.itemView.ib_delete_product.setOnClickListener {
 
-                // TODO Step 8: Now let's call the delete function of the ProductsFragment.
-                // START
                 fragment.deleteProduct(model.product_id)
-                // END
             }
 
             holder.itemView.setOnClickListener {
                 val intent = Intent(context, ProductDetailsActivity::class.java)
                 intent.putExtra(Constants.EXTRA_PRODUCT_ID, model.product_id)
+                intent.putExtra(Constants.EXTRA_PRODUCT_OWNER_ID, model.user_id)
                 context.startActivity(intent)
             }
-            // END
         }
     }
 

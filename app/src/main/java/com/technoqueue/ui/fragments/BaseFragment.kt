@@ -10,7 +10,6 @@ import com.technoqueue.R
 import kotlinx.android.synthetic.main.dialog_progress.*
 
 open class BaseFragment : Fragment() {
-    // TODO: Rename and change types of parameters
 
     private lateinit var mProgressDialog: Dialog
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,15 +21,13 @@ open class BaseFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_base, container, false)
     }
 
     fun showProgressDialog(text: String) {
         mProgressDialog = Dialog(requireActivity())
 
-        /*Set the screen content from a layout resource.
-        The resource will be inflated, adding all top-level views to the screen.*/
         mProgressDialog.setContentView(R.layout.dialog_progress)
 
         mProgressDialog.tv_progress_text.text = text
@@ -38,7 +35,6 @@ open class BaseFragment : Fragment() {
         mProgressDialog.setCancelable(false)
         mProgressDialog.setCanceledOnTouchOutside(false)
 
-        //Start the dialog and display it on screen.
         mProgressDialog.show()
     }
 

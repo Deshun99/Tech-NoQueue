@@ -95,9 +95,7 @@ class AddProductActivity : BaseActivity(), View.OnClickListener {
     }
 
     fun imageUploadSuccess(imageURL: String) {
-        // hideProgressDialog()
 
-        // showErrorSnackBar("Product image s uploaded successfully. Image URL: $imageURL", false)
         mProductImageURL = imageURL
 
         uploadProductDetails()
