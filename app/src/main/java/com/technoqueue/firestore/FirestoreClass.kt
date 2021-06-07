@@ -11,10 +11,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.technoqueue.models.Address
-import com.technoqueue.models.Cart
-import com.technoqueue.models.User
-import com.technoqueue.models.Product
+import com.technoqueue.models.*
 import com.technoqueue.ui.activities.*
 import com.technoqueue.ui.fragments.DashboardFragment
 import com.technoqueue.ui.fragments.ProductsFragment
@@ -282,23 +279,47 @@ class FirestoreClass {
             }
     }
 
-    fun getAllProductsList(activity: CartListActivity) {
+    fun getAllProductsList(activity: Activity) {
+        // The collection name for PRODUCTS
         mFireStore.collection(Constants.PRODUCTS)
-            .get()
+            .get() // Will get the documents snapshots.
             .addOnSuccessListener { document ->
+
+                // Here we get the list of boards in the form of documents.
                 Log.e("Products List", document.documents.toString())
+
+                // Here we have created a new instance for Products ArrayList.
                 val productsList: ArrayList<Product> = ArrayList()
+
+                // A for loop as per the list of documents to convert them into Products ArrayList.
                 for (i in document.documents) {
+
                     val product = i.toObject(Product::class.java)
                     product!!.product_id = i.id
+
                     productsList.add(product)
                 }
 
-                activity.successProductsListFromFireStore(productsList)
-
+                when (activity) {
+                    is CartListActivity -> {
+                        activity.successProductsListFromFireStore(productsList)
+                    }
+                    is CheckoutActivity -> {
+                        activity.successProductsListFromFireStore(productsList)
+                    }
+                }
             }
             .addOnFailureListener { e ->
-                activity.hideProgressDialog()
+                // Hide the progress dialog if there is any error based on the base class instance.
+                when (activity) {
+                    is CartListActivity -> {
+                        activity.hideProgressDialog()
+                    }
+                    is CheckoutActivity -> {
+                        activity.hideProgressDialog()
+                    }
+                }
+
                 Log.e("Get Product List", "Error while getting all product list.", e)
             }
     }
@@ -508,6 +529,32 @@ class FirestoreClass {
                 Log.e(
                     activity.javaClass.simpleName,
                     "Error while deleting the address.",
+                    e
+                )
+            }
+    }
+
+    fun placeOrder(activity: CheckoutActivity, order: Order) {
+
+        mFireStore.collection(Constants.ORDERS)
+            .document()
+            // Here the userInfo are Field and the SetOption is set to merge. It is for if we wants to merge
+            .set(order, SetOptions.merge())
+            .addOnSuccessListener {
+
+                // TODO Step 9: Notify the success result.
+                // START
+                // Here call a function of base activity for transferring the result to it.
+                activity.orderPlacedSuccess()
+                // END
+            }
+            .addOnFailureListener { e ->
+
+                // Hide the progress dialog if there is any error.
+                activity.hideProgressDialog()
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while placing an order.",
                     e
                 )
             }
