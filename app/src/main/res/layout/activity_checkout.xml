@@ -57,7 +57,8 @@
                 android:id="@+id/rv_cart_list_items"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_product_items" />
+                android:layout_below="@id/tv_product_items"
+                android:layout_marginTop="-20dp" />
 
             <com.technoqueue.utils.TextView
                 android:id="@+id/tv_selected_address"

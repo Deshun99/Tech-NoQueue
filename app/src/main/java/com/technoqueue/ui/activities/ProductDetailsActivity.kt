@@ -73,8 +73,8 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
 
         val addToCart = Cart(
             FirestoreClass().getCurrentUserID(),
-            mProductOwnerId,
             mProductId,
+            mProductOwnerId,
             mProductDetails.title,
             mProductDetails.price,
             mProductDetails.image,
