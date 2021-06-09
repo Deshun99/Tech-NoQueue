@@ -27,7 +27,7 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
         setContentView(R.layout.activity_product_details)
 
         if (intent.hasExtra(Constants.EXTRA_PRODUCT_ID)) {
-            mProductOwnerId =
+            mProductId =
                 intent.getStringExtra(Constants.EXTRA_PRODUCT_ID)!!
         }
 
