@@ -227,6 +227,18 @@ class FirestoreClass {
 
                 }
             }
+            .addOnFailureListener { e ->
+                // Hide the progress dialog if there is any error based on the base class instance.
+                when (fragment) {
+                    is ProductsFragment -> {
+                        fragment.hideProgressDialog()
+                    }
+                }
+
+                Log.e("Get Product List", "Error while getting product list.", e)
+            }
+
+
     }
 
     fun deleteProduct(fragment: ProductsFragment, productId: String) {
@@ -392,11 +404,17 @@ class FirestoreClass {
                     is CartListActivity -> {
                         activity.successCartItemsList(list)
                     }
+                    is CheckoutActivity -> {
+                        activity.successCartItemsList(list)
+                    }
                 }
             }
             .addOnFailureListener { e ->
                 when (activity) {
                     is CartListActivity -> {
+                        activity.hideProgressDialog()
+                    }
+                    is CheckoutActivity -> {
                         activity.hideProgressDialog()
                     }
                 }
@@ -570,7 +588,7 @@ class FirestoreClass {
         for (cart in cartList) {
 
             val soldProduct = SoldProduct(
-                cart.product_owner_id,
+                FirestoreClass().getCurrentUserID(),
                 cart.title,
                 cart.price,
                 cart.cart_quantity,

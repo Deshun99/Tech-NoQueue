@@ -13,12 +13,13 @@ import com.technoqueue.models.Product
 import com.technoqueue.utils.Constants
 import com.technoqueue.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_product_details.*
+import kotlinx.android.synthetic.main.item_cart_layout.view.*
 
 class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
 
     private lateinit var mProductDetails: Product
     private var mProductId: String = ""
-    private var mProductOwnerId: String = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -31,16 +32,16 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
                 intent.getStringExtra(Constants.EXTRA_PRODUCT_ID)!!
         }
 
-        // var productOwnerId: String = ""
+        var productOwnerId: String = ""
 
         if (intent.hasExtra(Constants.EXTRA_PRODUCT_OWNER_ID)) {
-            mProductOwnerId =
+            productOwnerId =
                 intent.getStringExtra(Constants.EXTRA_PRODUCT_OWNER_ID)!!
         }
 
         setupActionBar()
 
-        if (FirestoreClass().getCurrentUserID() == mProductOwnerId) {
+        if (FirestoreClass().getCurrentUserID() == productOwnerId) {
             btn_add_to_cart.visibility = View.GONE
             btn_go_to_cart.visibility = View.GONE
         } else {
@@ -74,7 +75,6 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
         val addToCart = Cart(
             FirestoreClass().getCurrentUserID(),
             mProductId,
-            mProductOwnerId,
             mProductDetails.title,
             mProductDetails.price,
             mProductDetails.image,
