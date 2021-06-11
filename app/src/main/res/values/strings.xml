@@ -52,7 +52,6 @@
     <string name="et_hint_product_description">Product Description</string>
     <string name="et_hint_product_quantity">Product Quantity</string>
     <string name="btn_lbl_submit">Submit</string>
-
     <string name="err_msg_select_product_image">Please select product image.</string>
     <string name="err_msg_enter_product_title">Please enter product title.</string>
     <string name="err_msg_enter_product_price">Please enter product price.</string>
@@ -60,23 +59,19 @@
     <string name="err_msg_enter_product_quantity">Please enter product quantity.</string>
     <string name="no_products_added_yet">No product added yet!</string>
     <string name="product_uploaded_success_message">Your product was uploaded successfully.</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="no_dashboard_item_found">No item found!</string>
-
     <string name="product_delete_success_message">Your Product is deleted successfully.</string>
     <string name="delete_dialog_title">Delete</string>
     <string name="delete_dialog_message">Are you sure you want to delete the product?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-
     <string name="title_product_details">PRODUCT DETAIL</string>
     <string name="lbl_product_description">Product Descriptions</string>
     <string name="lbl_product_details_stock_quantity">Stock Quantity</string>
     <string name="btn_lbl_add_to_cart">ADD TO CART</string>
     <string name="success_message_item_added_to_cart">Product is added to your cart.</string>
     <string name="btn_lbl_go_to_cart">GO TO CART</string>
-
     <string name="title_my_cart">MY CART</string>
     <string name="no_cart_item_found">No item found in cart!</string>
     <string name="lbl_subtotal">Subtotal</string>
@@ -90,7 +85,6 @@
     <string name="title_address_list">ADDRESS LIST</string>
     <string name="no_address_found">No Address Found!</string>
     <string name="lbL_add_address">Add Address</string>
-
     <string name="title_add_address">ADD ADDRESS</string>
     <string name="hint_full_name">Full name</string>
     <string name="hint_phone_number">Phone number</string>
@@ -112,7 +106,6 @@
     <string name="msg_your_address_updated_successfully">Your address was updated successfully.</string>
     <string name="err_your_address_deleted_successfully">Your address was deleted successfully.</string>
     <string name="title_select_address">SELECT ADDRESS</string>
-
     <string name="title_checkout">CHECKOUT</string>
     <string name="checkout_lbl_product_items">Product Items</string>
     <string name="checkout_lbl_selected_address">Selected Address</string>
@@ -120,9 +113,7 @@
     <string name="lbl_payment_mode">Payment Mode</string>
     <string name="lbl_cash_on_delivery">Cash On Delivery</string>
     <string name="btn_lbl_place_order">PLACE ORDER</string>
-
     <string name="no_orders_placed_yet">No orders placed yet!</string>
-
     <string name="title_my_order_details">MY ORDER DETAILS</string>
     <string name="order_details_lbl">Order Details</string>
     <string name="order_details_lbl_order_id">Order ID</string>
@@ -130,12 +121,9 @@
     <string name="order_details_lbl_order_status">Order Status</string>
     <string name="order_status_pending">Pending</string>
     <string name="order_details_lbl_shipping_address">Shipping Address</string>
-
     <string name="order_status_in_process">In Process</string>
     <string name="order_status_delivered">Delivered</string>
-
     <string name="title_sold_products">Sold Products</string>
     <string name="no_products_sold_yet">No products sold yet!</string>
-
     <string name="title_sold_product_details">SOLD PRODUCT DETAILS</string>
 </resources>

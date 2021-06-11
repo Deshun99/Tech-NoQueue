@@ -17,7 +17,6 @@ import kotlinx.android.synthetic.main.activity_cart_list.*
 class CartListActivity : BaseActivity() {
 
     private lateinit var mProductsList: ArrayList<Product>
-
     private lateinit var mCartListItems: ArrayList<Cart>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +36,6 @@ class CartListActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-
         getProductList()
     }
 
@@ -57,14 +55,12 @@ class CartListActivity : BaseActivity() {
     private fun getProductList() {
 
         showProgressDialog(resources.getString(R.string.please_wait))
-
         FirestoreClass().getAllProductsList(this@CartListActivity)
     }
 
     fun successProductsListFromFireStore(productsList: ArrayList<Product>) {
 
         mProductsList = productsList
-
         getCartItemsList()
     }
 

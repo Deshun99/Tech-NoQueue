@@ -64,5 +64,4 @@ open class DashboardItemsListAdapter(
         fun onClick(position: Int, product: Product)
 
     }
-
 }

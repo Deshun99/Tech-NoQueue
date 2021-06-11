@@ -11,9 +11,6 @@ import com.technoqueue.models.Order
 import com.technoqueue.ui.adapters.MyOrdersListAdapter
 import kotlinx.android.synthetic.main.fragment_orders.*
 
-/**
- * Order listing fragment.
- */
 class OrdersFragment : BaseFragment() {
 
     override fun onCreateView(
@@ -31,24 +28,14 @@ class OrdersFragment : BaseFragment() {
         getMyOrdersList()
     }
 
-    /**
-     * A function to get the list of my orders.
-     */
     private fun getMyOrdersList() {
-        // Show the progress dialog.
         showProgressDialog(resources.getString(R.string.please_wait))
 
         FirestoreClass().getMyOrdersList(this@OrdersFragment)
     }
 
-    /**
-     * A function to get the success result of the my order list from cloud firestore.
-     *
-     * @param ordersList List of my orders.
-     */
     fun populateOrdersListInUI(ordersList: ArrayList<Order>) {
 
-        // Hide the progress dialog.
         hideProgressDialog()
 
         if (ordersList.size > 0) {

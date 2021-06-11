@@ -55,7 +55,6 @@
     <dimen name="add_product_header_image_height">250dp</dimen>
     <dimen name="add_update_product_icon_padding">16dp</dimen>
     <dimen name="no_data_found_textSize">20sp</dimen>
-
     <dimen name="item_list_marginTop">16dp</dimen>
     <dimen name="item_list_padding">10dp</dimen>
     <dimen name="item_image_padding">2dp</dimen>
@@ -65,7 +64,6 @@
     <dimen name="rv_item_name_textSize">14sp</dimen>
     <dimen name="rv_item_price_marginTop">2dp</dimen>
     <dimen name="rv_item_price_textSize">12sp</dimen>
-
     <dimen name="item_dashboard_margin">5dp</dimen>
     <dimen name="item_dashboard_padding">1dp</dimen>
     <dimen name="item_dashboard_image_height">150dp</dimen>
@@ -75,9 +73,7 @@
     <dimen name="dashboard_item_paddingTopBottom">5dp</dimen>
     <dimen name="dashboard_item_textSize">12sp</dimen>
     <dimen name="dashboard_item_price_marginTop">2dp</dimen>
-
     <dimen name="delete_icon_padding">5dp</dimen>
-
     <dimen name="product_detail_image_height">250dp</dimen>
     <dimen name="product_details_title_price_marginTop">16dp</dimen>
     <dimen name="product_details_title_price_padding">16dp</dimen>
@@ -89,11 +85,9 @@
     <dimen name="product_details_stock_quantity_paddingTopBottom">5dp</dimen>
     <dimen name="product_details_description_textSize">14sp</dimen>
     <dimen name="product_details_stock_quantity_textSize">16sp</dimen>
-
     <dimen name="rv_cart_items_marginTop">16dp</dimen>
     <dimen name="ll_checkout_padding">16dp</dimen>
     <dimen name="checkout_label_value_textSize">18sp</dimen>
-
     <dimen name="cart_item_marginTop">16dp</dimen>
     <dimen name="cart_item_paddingStartEnd">16dp</dimen>
     <dimen name="cart_item_paddingTopBottom">12dp</dimen>
@@ -127,7 +121,6 @@
     <dimen name="item_address_type_paddingTopBottom">2dp</dimen>
     <dimen name="address_details_textSize">14sp</dimen>
     <dimen name="address_details_marginTop">2dp</dimen>
-
     <dimen name="checkout_content_marginStartEnd">16dp</dimen>
     <dimen name="checkout_content_marginTopBottom">10dp</dimen>
     <dimen name="checkout_content_lbl_padding">2dp</dimen>
@@ -136,7 +129,6 @@
     <dimen name="checkout_content_paddingTopBottom">10dp</dimen>
     <dimen name="ll_checkout_place_order_padding">16dp</dimen>
     <dimen name="ll_checkout_items_receipt">16dp</dimen>
-
     <dimen name="my_order_details_content_marginStartEnd">16dp</dimen>
     <dimen name="my_order_details_content_marginTopBottom">10dp</dimen>
     <dimen name="my_order_details_content_lbl_padding">2dp</dimen>
@@ -148,7 +140,6 @@
     <dimen name="my_order_details_content_paddingTopBottom">10dp</dimen>
     <dimen name="my_order_details_items_receipt">16dp</dimen>
     <dimen name="my_order_details_label_value_textSize">18sp</dimen>
-
     <dimen name="sold_details_content_marginStartEnd">16dp</dimen>
     <dimen name="sold_details_content_marginTopBottom">10dp</dimen>
     <dimen name="sold_details_content_lbl_padding">2dp</dimen>

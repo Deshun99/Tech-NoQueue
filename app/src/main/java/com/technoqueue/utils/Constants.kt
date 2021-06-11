@@ -31,35 +31,21 @@ object Constants {
     const val PRODUCT_ID: String = "product_id"
     const val USER_PROFILE_IMAGE:String = "User_Profile_Image"
     const val PRODUCT_IMAGE: String = "Product_Image"
-
     const val USER_ID: String = "user_id"
-
     const val PRODUCTS : String = "products"
     const val TECHNOQUEUE_PREFERENCES: String = "TechNoQueuePrefs"
-
     const val EXTRA_PRODUCT_ID: String = "extra_product_id"
     const val EXTRA_PRODUCT_OWNER_ID: String = "extra_product_owner_id"
     const val CART_QUANTITY: String = "cart_quantity"
-
     const val HOME: String = "Home"
     const val OFFICE: String = "Office"
     const val OTHER: String = "Other"
-
     const val EXTRA_SELECTED_ADDRESS: String = "extra_selected_address"
-
     const val ORDERS: String = "orders"
-
     const val STOCK_QUANTITY: String = "stock_quantity"
-
     const val EXTRA_MY_ORDER_DETAILS: String = "extra_MY_ORDER_DETAILS"
-
     const val SOLD_PRODUCTS: String = "sold products"
-
     const val EXTRA_SOLD_PRODUCT_DETAILS: String = "extra_sold_product_details"
-
-
-
-
 
     fun showImageChooser(activity: Activity) {
 

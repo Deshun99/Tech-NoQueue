@@ -33,8 +33,6 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
                 intent.getStringExtra(Constants.EXTRA_PRODUCT_ID)!!
         }
 
-        //var productOwnerId: String = ""
-
         if (intent.hasExtra(Constants.EXTRA_PRODUCT_OWNER_ID)) {
             mProductOwnerId =
                 intent.getStringExtra(Constants.EXTRA_PRODUCT_OWNER_ID)!!
