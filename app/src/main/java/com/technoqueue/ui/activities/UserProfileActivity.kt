@@ -63,10 +63,10 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
             if (mUserDetails.mobile != 0L) {
                 et_mobile_number.setText(mUserDetails.mobile.toString())
             }
-            if (mUserDetails.gender == Constants.MALE) {
-                rb_male.isChecked = true
+            if (mUserDetails.accountType == Constants.CUSTOMER) {
+                rb_customer.isChecked = true
             } else {
-                rb_female.isChecked = true
+                rb_vendor.isChecked = true
             }
         }
 
@@ -207,10 +207,10 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
 
         val mobileNumber = et_mobile_number.text.toString().trim { it <= ' ' }
 
-        val gender = if (rb_male.isChecked) {
-            Constants.MALE
+        val accountType = if (rb_customer.isChecked) {
+            Constants.CUSTOMER
         } else {
-            Constants.FEMALE
+            Constants.VENDOR
         }
 
         if (mUserProfileImageURL.isNotEmpty()) {
@@ -221,8 +221,8 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
             userHashMap[Constants.MOBILE] = mobileNumber.toLong()
         }
 
-        if (gender.isNotEmpty() && gender != mUserDetails.gender) {
-            userHashMap[Constants.GENDER] = gender
+        if (accountType.isNotEmpty() && accountType != mUserDetails.accountType) {
+            userHashMap[Constants.ACCOUNTTYPE] = accountType
         }
 
         if (mUserDetails.profileCompleted == 0) {

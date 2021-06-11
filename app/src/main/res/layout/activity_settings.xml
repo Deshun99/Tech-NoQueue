@@ -99,7 +99,7 @@
             tools:text="Denis Panjuta" />
 
         <com.technoqueue.utils.TextView
-            android:id="@+id/tv_gender"
+            android:id="@+id/tv_accountType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_name"
@@ -113,7 +113,7 @@
             android:id="@+id/tv_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_gender"
+            android:layout_below="@id/tv_accountType"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/settings_info_marginTop"
             android:textColor="@color/colorSecondaryText"
