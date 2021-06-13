@@ -13,10 +13,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.technoqueue.models.*
 import com.technoqueue.ui.activities.*
-import com.technoqueue.ui.fragments.DashboardFragment
-import com.technoqueue.ui.fragments.OrdersFragment
-import com.technoqueue.ui.fragments.ProductsFragment
-import com.technoqueue.ui.fragments.SoldProductsFragment
+import com.technoqueue.ui.fragments.*
 import com.technoqueue.utils.Constants
 
 class FirestoreClass {
@@ -221,7 +218,7 @@ class FirestoreClass {
                 }
 
                 when(fragment) {
-                    is ProductsFragment -> {
+                    is MenuFragment -> {
                         fragment.successProductsListFromFireStore(productsList)
                     }
 
@@ -229,7 +226,7 @@ class FirestoreClass {
             }
             .addOnFailureListener { e ->
                 when (fragment) {
-                    is ProductsFragment -> {
+                    is MenuFragment -> {
                         fragment.hideProgressDialog()
                     }
                 }
@@ -240,7 +237,7 @@ class FirestoreClass {
 
     }
 
-    fun deleteProduct(fragment: ProductsFragment, productId: String) {
+    fun deleteProduct(fragment: MenuFragment, productId: String) {
         mFireStore.collection(Constants.PRODUCTS)
             .document(productId)
             .delete()
@@ -332,7 +329,7 @@ class FirestoreClass {
             }
     }
 
-    fun getDashboardItemsList(fragment: DashboardFragment) {
+    fun getDashboardItemsList(fragment: WelcomeFragment) {
         mFireStore.collection(Constants.PRODUCTS)
             .get()
             .addOnSuccessListener { document ->

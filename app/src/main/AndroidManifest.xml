@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.technoqueue">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activities.SoldProductDetailsActivity"
+        <activity
+            android:name=".ui.activities.DashboardActivity"
+            android:label="@string/title_activity_dashboard"></activity>
+        <activity
+            android:name=".ui.activities.SoldProductDetailsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -40,9 +46,6 @@
             android:name=".ui.activities.AddProductActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".ui.activities.DashboardActivity"
-            android:label="@string/app_name" />
         <activity
             android:name=".ui.activities.UserProfileActivity"
             android:screenOrientation="portrait"
@@ -77,7 +80,5 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
-
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 </manifest>

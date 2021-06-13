@@ -35,8 +35,8 @@
     <string name="image_selection_failed">Image selection Failed!</string>
     <string name="err_msg_enter_mobile_number">Please enter mobile number.</string>
     <string name="msg_profile_update_success">Your profile is updated successfully.</string>
-    <string name="title_products">Products</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_menu">Menu</string>
+    <string name="title_welcome">Welcome</string>
     <string name="title_orders">Orders</string>
     <string name="please_click_back_again_to_exit">Please click back again to exit.</string>
     <string name="action_settings">Settings</string>
@@ -124,6 +124,7 @@
     <string name="order_status_in_process">In Process</string>
     <string name="order_status_delivered">Delivered</string>
     <string name="title_sold_products">Sold Products</string>
-    <string name="no_products_sold_yet">No products sold yet!</string>
+    <string name="no_products_sold_yet">No products sold yet!</string>f
     <string name="title_sold_product_details">SOLD PRODUCT DETAILS</string>
+    <string name="title_activity_dashboard">MainActivity</string>
 </resources>

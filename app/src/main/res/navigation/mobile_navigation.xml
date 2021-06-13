@@ -3,19 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_dashboard">
+    app:startDestination="@+id/navigation_welcome">
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.technoqueue.ui.fragments.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_products" />
+        android:id="@+id/navigation_welcome"
+        android:name="com.technoqueue.ui.fragments.WelcomeFragment"
+        android:label="@string/title_welcome"
+        tools:layout="@layout/fragment_welcome" />
 
     <fragment
-        android:id="@+id/navigation_products"
-        android:name="com.technoqueue.ui.fragments.ProductsFragment"
-        android:label="@string/title_products"
-        tools:layout="@layout/fragment_products" />
+        android:id="@+id/navigation_menu"
+        android:name="com.technoqueue.ui.fragments.MenuFragment"
+        android:label="@string/title_menu"
+        tools:layout="@layout/fragment_menu" />
 
     <fragment
         android:id="@+id/navigation_orders"

@@ -23,7 +23,7 @@ object Constants {
     const val VENDOR: String = "vendor"
     const val DEFAULT_CART_QUANTITY: String = "1"
     const val MOBILE: String = "mobile"
-    const val ACCOUNTTYPE: String = "account_type"
+    const val ACCOUNTTYPE: String = "accountType"
     const val IMAGE: String = "image"
     const val COMPLETE_PROFILE: String = "profileCompleted"
     const val FIRST_NAME: String = "firstName"

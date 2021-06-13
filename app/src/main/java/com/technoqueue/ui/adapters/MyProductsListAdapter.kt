@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.technoqueue.R
 import com.technoqueue.models.Product
 import com.technoqueue.ui.activities.ProductDetailsActivity
-import com.technoqueue.ui.fragments.ProductsFragment
+import com.technoqueue.ui.fragments.MenuFragment
 import com.technoqueue.utils.Constants
 import com.technoqueue.utils.GlideLoader
 import kotlinx.android.synthetic.main.item_list_layout.view.*
@@ -18,7 +18,7 @@ open class MyProductsListAdapter (
 
     private val context: Context,
     private var list: ArrayList<Product>,
-    private val fragment: ProductsFragment
+    private val fragment: MenuFragment
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
