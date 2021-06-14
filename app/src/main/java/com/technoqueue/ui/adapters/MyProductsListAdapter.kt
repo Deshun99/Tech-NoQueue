@@ -59,5 +59,9 @@ open class MyProductsListAdapter (
         return list.size
     }
 
+    fun getProducts(): ArrayList<Product> {
+        return list
+    }
+
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
 }

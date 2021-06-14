@@ -6,4 +6,10 @@
         android:icon="@drawable/ic_vector_add_product"
         android:title="@string/action_add_product"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_edit_storefront"
+        android:icon="@drawable/ic_vector_edit_storefront"
+        android:title="Edit Storefront"
+        app:showAsAction="always" />
 </menu>

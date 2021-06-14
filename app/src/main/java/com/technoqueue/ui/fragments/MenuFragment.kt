@@ -6,10 +6,14 @@ import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.FirebaseApp
 import com.technoqueue.R
 import com.technoqueue.firestore.FirestoreClass
 import com.technoqueue.models.Product
+import com.technoqueue.models.User
 import com.technoqueue.ui.activities.AddProductActivity
+import com.technoqueue.ui.activities.EditStorefrontActivity
+import com.technoqueue.ui.activities.SettingsActivity
 import com.technoqueue.ui.adapters.MyProductsListAdapter
 import kotlinx.android.synthetic.main.fragment_menu.*
 
@@ -107,8 +111,10 @@ class MenuFragment : BaseFragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+
         inflater.inflate(R.menu.add_product_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -119,6 +125,13 @@ class MenuFragment : BaseFragment() {
             R.id.action_add_product -> {
 
                 startActivity(Intent(activity, AddProductActivity::class.java))
+
+                return true
+            }
+
+            R.id.action_edit_storefront -> {
+
+                startActivity(Intent(activity, EditStorefrontActivity::class.java))
 
                 return true
             }

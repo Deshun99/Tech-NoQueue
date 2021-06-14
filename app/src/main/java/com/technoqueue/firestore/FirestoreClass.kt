@@ -159,6 +159,9 @@ class FirestoreClass {
                             is AddProductActivity ->{
                                 activity.imageUploadSuccess(uri.toString())
                             }
+                            is EditStorefrontActivity ->{
+                                activity.imageUploadSuccess(uri.toString())
+                            }
                         }
                     }
             }
