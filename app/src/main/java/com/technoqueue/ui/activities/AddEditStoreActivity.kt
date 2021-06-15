@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -17,59 +16,29 @@ import androidx.core.content.ContextCompat
 import com.technoqueue.R
 import com.technoqueue.firestore.FirestoreClass
 import com.technoqueue.models.Product
-import com.technoqueue.models.Stall
+import com.technoqueue.models.Store
 import com.technoqueue.ui.adapters.MyProductsListAdapter
 import com.technoqueue.utils.Constants
 import com.technoqueue.utils.GlideLoader
+import kotlinx.android.synthetic.main.activity_add_edit_store.*
 import kotlinx.android.synthetic.main.activity_add_product.*
-import kotlinx.android.synthetic.main.activity_edit_storefront.*
-import kotlinx.android.synthetic.main.activity_edit_storefront.et_product_description
-import kotlinx.android.synthetic.main.activity_edit_storefront.et_product_title
+import kotlinx.android.synthetic.main.activity_add_product.et_product_description
+import kotlinx.android.synthetic.main.activity_add_product.et_product_title
 import java.io.IOException
 
-class EditStorefrontActivity : BaseActivity(), View.OnClickListener {
+class AddEditStoreActivity : BaseActivity(), View.OnClickListener {
 
     private var mSelectedImageFileURI: Uri? = null
-    private var mProductImageURL: String = ""
-
+    private var mStoreImageURL: String = ""
     private lateinit var mProductsList: ArrayList<Product>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_edit_storefront)
+        setContentView(R.layout.activity_add_edit_store)
         setupActionBar()
 
         iv_store_image.setOnClickListener(this)
         btn_submit_changes.setOnClickListener(this)
-    }
-
-    override fun onClick(v: View?) {
-        if(v != null) {
-            when(v.id) {
-                R.id.iv_store_image -> {
-                    if (ContextCompat.checkSelfPermission(
-                            this,
-                            Manifest.permission.READ_EXTERNAL_STORAGE
-                        )
-                        == PackageManager.PERMISSION_GRANTED
-                    ) {
-                        Constants.showImageChooser(this@EditStorefrontActivity)
-                    } else {
-                        ActivityCompat.requestPermissions(
-                            this,
-                            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-                            Constants.READ_STORAGE_PERMISSION_CODE
-                        )
-                    }
-                }
-
-                R.id.btn_submit_changes -> {
-                    if(validateProductDetails()) {
-                        uploadProductImage()
-                    }
-                }
-            }
-        }
     }
 
     private fun setupActionBar() {
@@ -84,35 +53,77 @@ class EditStorefrontActivity : BaseActivity(), View.OnClickListener {
         toolbar_edit_storefront_activity.setNavigationOnClickListener { onBackPressed() }
     }
 
-    private fun validateProductDetails(): Boolean {
-        return when {
-            mSelectedImageFileURI == null -> {
-                showErrorSnackBar(resources.getString(R.string.err_msg_select_product_image), true)
-                false
-            }
+    override fun onClick(v: View?) {
+        if(v != null) {
+            when(v.id) {
+                R.id.iv_store_image -> {
+                    if (ContextCompat.checkSelfPermission(
+                            this,
+                            Manifest.permission.READ_EXTERNAL_STORAGE
+                        )
+                        == PackageManager.PERMISSION_GRANTED
+                    ) {
+                        Constants.showImageChooser(this@AddEditStoreActivity)
+                    } else {
+                        ActivityCompat.requestPermissions(
+                            this,
+                            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                            Constants.READ_STORAGE_PERMISSION_CODE
+                        )
+                    }
+                }
 
-            TextUtils.isEmpty(et_product_title.text.toString().trim { it <= ' ' }) -> {
-                showErrorSnackBar(resources.getString(R.string.err_msg_enter_product_title), true)
-                false
+                R.id.btn_submit_changes -> {
+                    if(validateProductDetails()) {
+                        uploadStoreImage()
+                    }
+                }
             }
-
-            TextUtils.isEmpty(et_product_description.text.toString().trim { it <= ' ' }) -> {
-                showErrorSnackBar(resources.getString(R.string.err_msg_enter_product_description), true)
-                false
-            }
-            else -> {
-                true
-            }
-
         }
     }
 
-    private fun uploadProductImage() {
+    private fun uploadStoreImage() {
         showProgressDialog(resources.getString(R.string.please_wait))
         FirestoreClass().uploadImageToCloudStorage(
-            this@EditStorefrontActivity,
+            this@AddEditStoreActivity,
             mSelectedImageFileURI,
-            Constants.PRODUCT_IMAGE)
+            Constants.STORE_IMAGE)
+    }
+
+    fun storeUploadSuccess() {
+        hideProgressDialog()
+        Toast.makeText(
+            this@AddEditStoreActivity,
+            resources.getString(R.string.store_uploaded_success_message),
+            Toast.LENGTH_SHORT
+        ).show()
+        finish()
+    }
+
+    fun imageUploadSuccess(imageURL: String) {
+
+        mStoreImageURL = imageURL
+        uploadStoreDetails()
+    }
+
+    private fun uploadStoreDetails() {
+        val username = this.getSharedPreferences(
+            Constants.TECHNOQUEUE_PREFERENCES, Context.MODE_PRIVATE).getString(
+            Constants.LOGGED_IN_USERNAME, "")!!
+
+        mProductsList = MyProductsListAdapter.getProducts()
+
+        val store = Store(
+            FirestoreClass().getCurrentUserID(),
+            username,
+            et_product_title.text.toString().trim { it <= ' '},
+            mProductsList,
+            et_product_description.text.toString().trim { it <= ' '},
+            mStoreImageURL
+        )
+
+        FirestoreClass().uploadStoreDetails(this@AddEditStoreActivity, store)
+
     }
 
     override fun onRequestPermissionsResult(
@@ -155,30 +166,26 @@ class EditStorefrontActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
-    fun imageUploadSuccess(imageURL: String) {
+    private fun validateProductDetails(): Boolean {
+        return when {
+            mSelectedImageFileURI == null -> {
+                showErrorSnackBar(resources.getString(R.string.err_msg_select_product_image), true)
+                false
+            }
 
-        mProductImageURL = imageURL
+            TextUtils.isEmpty(et_product_title.text.toString().trim { it <= ' ' }) -> {
+                showErrorSnackBar(resources.getString(R.string.err_msg_enter_product_title), true)
+                false
+            }
 
-        uploadProductDetails()
-    }
+            TextUtils.isEmpty(et_product_description.text.toString().trim { it <= ' ' }) -> {
+                showErrorSnackBar(resources.getString(R.string.err_msg_enter_product_description), true)
+                false
+            }
+            else -> {
+                true
+            }
 
-    private fun uploadProductDetails() {
-        val username = this.getSharedPreferences(
-            Constants.TECHNOQUEUE_PREFERENCES, Context.MODE_PRIVATE).getString(
-            Constants.LOGGED_IN_USERNAME, "")!!
-
-        mProductsList = MyProductsListAdapter.getProducts()
-
-        val product = Stall(
-            FirestoreClass().getCurrentUserID(),
-            username,
-            et_product_title.text.toString().trim { it <= ' '},
-            mProductsList,
-            et_product_description.text.toString().trim { it <= ' '},
-            mProductImageURL
-        )
-
-        FirestoreClass().uploadProductDetails(this,product)
-
+        }
     }
 }

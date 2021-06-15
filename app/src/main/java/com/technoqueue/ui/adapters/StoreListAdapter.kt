@@ -8,12 +8,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.technoqueue.R
 import com.technoqueue.models.Product
+import com.technoqueue.models.Store
 import com.technoqueue.utils.GlideLoader
 import kotlinx.android.synthetic.main.item_dashboard_layout.view.*
 
-open class DashboardItemsListAdapter(
+open class StoreListAdapter(
     private val context: Context,
-    private var list: ArrayList<Product>
+    private var list: ArrayList<Store>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var onClickListener: OnClickListener? = null

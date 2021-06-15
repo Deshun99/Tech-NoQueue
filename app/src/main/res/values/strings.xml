@@ -59,6 +59,7 @@
     <string name="err_msg_enter_product_quantity">Please enter product quantity.</string>
     <string name="no_products_added_yet">No product added yet!</string>
     <string name="product_uploaded_success_message">Your product was uploaded successfully.</string>
+    <string name="store_uploaded_success_message">Your store was uploaded successfully.</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="no_dashboard_item_found">No item found!</string>
     <string name="product_delete_success_message">Your Product is deleted successfully.</string>
@@ -127,4 +128,9 @@
     <string name="no_products_sold_yet">No products sold yet!</string>f
     <string name="title_sold_product_details">SOLD PRODUCT DETAILS</string>
     <string name="title_activity_dashboard">MainActivity</string>
+    <string name="btn_lbl_go_to_menu">GO TO MENU</string>
+    <string name="title_store_details">STORE DETAIL</string>
+    <string name="lbl_store_description">Store Description</string>
+    <string name="btn_lbl_edit_description">EDIT DESCRIPTION</string>
+    <string name="edit_store_description">EDIT STORE DESCRIPTION</string>
 </resources>

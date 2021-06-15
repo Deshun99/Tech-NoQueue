@@ -159,7 +159,7 @@ class FirestoreClass {
                             is AddProductActivity ->{
                                 activity.imageUploadSuccess(uri.toString())
                             }
-                            is EditStorefrontActivity ->{
+                            is AddEditStoreActivity ->{
                                 activity.imageUploadSuccess(uri.toString())
                             }
                         }
@@ -192,6 +192,26 @@ class FirestoreClass {
             .set(productInfo, SetOptions.merge())
             .addOnSuccessListener {
                 activity.productUploadSuccess()
+            }
+            .addOnFailureListener { e ->
+
+                activity.hideProgressDialog()
+
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while uploading the product details.",
+                    e
+                )
+            }
+    }
+
+    fun uploadStoreDetails(activity: AddEditStoreActivity, storeInfo: Store) {
+
+        mFireStore.collection(Constants.STORES)
+            .document()
+            .set(storeInfo, SetOptions.merge())
+            .addOnSuccessListener {
+                activity.storeUploadSuccess()
             }
             .addOnFailureListener { e ->
 
@@ -271,6 +291,22 @@ class FirestoreClass {
             .addOnFailureListener { e ->
                 activity.hideProgressDialog()
                 Log.e(activity.javaClass.simpleName, "Error while getting the product details.", e)
+            }
+    }
+
+    fun getStoreDetails(activity: StoreDetailsActivity, storeId: String) {
+
+        mFireStore.collection(Constants.STORES)
+            .document(storeId)
+            .get()
+            .addOnSuccessListener { document ->
+                Log.e(activity.javaClass.simpleName, document.toString())
+                val store = document.toObject(Store::class.java)!!
+                activity.storeDetailsSuccess(store)
+            }
+            .addOnFailureListener { e ->
+                activity.hideProgressDialog()
+                Log.e(activity.javaClass.simpleName, "Error while getting the store details.", e)
             }
     }
 
