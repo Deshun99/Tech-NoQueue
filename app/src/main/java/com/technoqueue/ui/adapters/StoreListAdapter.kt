@@ -11,6 +11,8 @@ import com.technoqueue.models.Product
 import com.technoqueue.models.Store
 import com.technoqueue.utils.GlideLoader
 import kotlinx.android.synthetic.main.item_dashboard_layout.view.*
+import kotlinx.android.synthetic.main.item_dashboard_layout.view.iv_dashboard_item_image
+import kotlinx.android.synthetic.main.item_store_layout.view.*
 
 open class StoreListAdapter(
     private val context: Context,
@@ -43,8 +45,7 @@ open class StoreListAdapter(
                 model.image,
                 holder.itemView.iv_dashboard_item_image
             )
-            holder.itemView.tv_dashboard_item_title.text = model.title
-            holder.itemView.tv_dashboard_item_price.text = "$${model.price}"
+            holder.itemView.tv_storeName.text = model.title
 
             holder.itemView.setOnClickListener {
                 if (onClickListener != null) {
