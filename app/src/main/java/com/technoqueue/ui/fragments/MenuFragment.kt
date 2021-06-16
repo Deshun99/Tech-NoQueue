@@ -9,9 +9,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.technoqueue.R
 import com.technoqueue.firestore.FirestoreClass
 import com.technoqueue.models.Product
+import com.technoqueue.models.Store
 import com.technoqueue.ui.activities.AddProductActivity
 import com.technoqueue.ui.activities.AddEditStoreActivity
+import com.technoqueue.ui.activities.ProductDetailsActivity
+import com.technoqueue.ui.activities.StoreDetailsActivity
+import com.technoqueue.ui.adapters.DashboardItemsListAdapter
 import com.technoqueue.ui.adapters.MyProductsListAdapter
+import com.technoqueue.ui.adapters.StoreListAdapter
+import com.technoqueue.utils.Constants
 import kotlinx.android.synthetic.main.fragment_menu.*
 
 class MenuFragment : BaseFragment() {
@@ -23,6 +29,7 @@ class MenuFragment : BaseFragment() {
         setHasOptionsMenu(true)
     }
 
+    /*
     fun deleteProduct(productID: String) {
         showAlertDialogToDeleteProduct(productID)
     }
@@ -56,7 +63,36 @@ class MenuFragment : BaseFragment() {
             tv_no_products_found.visibility = View.VISIBLE
         }
     }
+     */
 
+    fun successStoreListFromFireStore(storeList: ArrayList<Store>) {
+        hideProgressDialog()
+
+        if (storeList.size > 0) {
+            rv_my_product_items.visibility = View.VISIBLE
+            tv_no_products_found.visibility = View.GONE
+
+            rv_my_product_items.layoutManager = LinearLayoutManager(activity)
+            rv_my_product_items.setHasFixedSize(true)
+
+            val adapterStores = StoreListAdapter(requireActivity(), storeList)
+            rv_my_product_items.adapter = adapterStores
+
+            adapterStores.setOnClickListener(object: StoreListAdapter.OnClickListener {
+                override fun onClick(position: Int, store: Store) {
+                    val intent = Intent(context, StoreDetailsActivity::class.java)
+                    intent.putExtra(Constants.EXTRA_STORE_ID, store.store_id)
+                    intent.putExtra(Constants.EXTRA_STORE_OWNER_ID, store.user_id)
+                    startActivity(intent)
+                }
+            })
+        } else {
+            rv_my_product_items.visibility = View.GONE
+            tv_no_products_found.visibility = View.VISIBLE
+        }
+    }
+
+    /*
     private fun showAlertDialogToDeleteProduct(productID: String) {
 
         val builder = AlertDialog.Builder(requireActivity())
@@ -90,10 +126,16 @@ class MenuFragment : BaseFragment() {
         showProgressDialog(resources.getString(R.string.please_wait))
         FirestoreClass().getProductsList(this)
     }
+     */
+
+    private fun getStoreListFromFireStore() {
+        showProgressDialog(resources.getString(R.string.please_wait))
+        FirestoreClass().getStoreList(this)
+    }
 
     override fun onResume() {
         super.onResume()
-        getProductListFromFireStore()
+        getStoreListFromFireStore()
     }
 
     override fun onCreateView(
@@ -103,7 +145,6 @@ class MenuFragment : BaseFragment() {
     ): View? {
 
         val root = inflater.inflate(R.layout.fragment_menu, container, false)
-
         return root
     }
 
@@ -122,14 +163,12 @@ class MenuFragment : BaseFragment() {
             R.id.action_add_product -> {
 
                 startActivity(Intent(activity, AddProductActivity::class.java))
-
                 return true
             }
 
             R.id.action_edit_storefront -> {
 
                 startActivity(Intent(activity, AddEditStoreActivity::class.java))
-
                 return true
             }
         }

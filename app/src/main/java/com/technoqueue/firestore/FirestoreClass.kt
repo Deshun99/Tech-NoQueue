@@ -225,6 +225,7 @@ class FirestoreClass {
             }
     }
 
+    /*
     fun getProductsList(fragment: Fragment) {
         mFireStore.collection(Constants.PRODUCTS)
             .whereEqualTo(Constants.USER_ID, getCurrentUserID())
@@ -256,8 +257,6 @@ class FirestoreClass {
 
                 Log.e("Get Product List", "Error while getting product list.", e)
             }
-
-
     }
 
     fun deleteProduct(fragment: MenuFragment, productId: String) {
@@ -277,6 +276,7 @@ class FirestoreClass {
                 )
             }
     }
+     */
 
     fun getProductDetails(activity: ProductDetailsActivity, productId: String) {
 
@@ -717,6 +717,104 @@ class FirestoreClass {
                     "Error while getting the list of sold products.",
                     e
                 )
+            }
+    }
+
+    fun getHealthyProductsList(fragment: Fragment) {
+        mFireStore.collection(Constants.PRODUCTS)
+            .whereEqualTo(Constants.PRODUCT_TYPE, Constants.HEALTHIER)
+            .get()
+            .addOnSuccessListener { document ->
+                Log.e("Healthier Product List", document.documents.toString())
+                val productsList: ArrayList<Product> = ArrayList()
+                for (i in document.documents) {
+
+                    val product = i.toObject(Product::class.java)
+                    product!!.product_id = i.id
+
+                    productsList.add(product)
+                }
+
+                when(fragment) {
+                    is WelcomeFragment -> {
+                        fragment.successDashboardItemsList(productsList)
+                    }
+
+                }
+            }
+            .addOnFailureListener { e ->
+                when (fragment) {
+                    is WelcomeFragment -> {
+                        fragment.hideProgressDialog()
+                    }
+                }
+
+                Log.e("Get Product List", "Error while getting healthy product list.", e)
+            }
+    }
+
+    fun getStoreList(fragment: Fragment) {
+        mFireStore.collection(Constants.STORES)
+            .get()
+            .addOnSuccessListener { document ->
+                Log.e("Store List", document.documents.toString())
+                val storeList: ArrayList<Store> = ArrayList()
+                for (i in document.documents) {
+
+                    val store = i.toObject(Store::class.java)
+                    store!!.store_id = i.id
+
+                    storeList.add(store)
+                }
+
+                when(fragment) {
+                    is MenuFragment -> {
+                        fragment.successStoreListFromFireStore(storeList)
+                    }
+
+                }
+            }
+            .addOnFailureListener { e ->
+                when (fragment) {
+                    is MenuFragment -> {
+                        fragment.hideProgressDialog()
+                    }
+                }
+
+                Log.e("Get Store List", "Error while getting store list.", e)
+            }
+    }
+
+    fun getStoreProductsList(activity: Activity, storeOwnerId: String) {
+        mFireStore.collection(Constants.PRODUCTS)
+            .whereEqualTo(Constants.USER_ID, storeOwnerId)
+            .get()
+            .addOnSuccessListener { document ->
+                Log.e("Product List", document.documents.toString())
+                val productsList: ArrayList<Product> = ArrayList()
+                for (i in document.documents) {
+
+                    val product = i.toObject(Product::class.java)
+                    product!!.product_id = i.id
+
+                    productsList.add(product)
+                }
+
+                when(activity) {
+                    is DisplayProductsActivity -> {
+                        activity.successProductsListFromFireStore(productsList)
+                    }
+
+                }
+            }
+            .addOnFailureListener { e ->
+                when (activity) {
+                    is DisplayProductsActivity -> {
+                        activity.hideProgressDialog()
+                    }
+                }
+
+                Log.e("Get Product List", "Error while getting product list.", e)
             }
     }
 }

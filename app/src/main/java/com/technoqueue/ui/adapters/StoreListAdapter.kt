@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.technoqueue.R
-import com.technoqueue.models.Product
 import com.technoqueue.models.Store
 import com.technoqueue.utils.GlideLoader
 import kotlinx.android.synthetic.main.item_dashboard_layout.view.*
@@ -22,7 +21,7 @@ open class StoreListAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return MyViewHolder(
             LayoutInflater.from(context).inflate(
-                R.layout.item_dashboard_layout,
+                R.layout.item_store_layout,
                 parent,
                 false
             )
@@ -44,7 +43,6 @@ open class StoreListAdapter(
                 holder.itemView.iv_dashboard_item_image
             )
             holder.itemView.tv_dashboard_item_title.text = model.title
-            holder.itemView.tv_dashboard_item_price.text = "$${model.price}"
 
             holder.itemView.setOnClickListener {
                 if (onClickListener != null) {
@@ -61,7 +59,7 @@ open class StoreListAdapter(
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
     interface OnClickListener {
-        fun onClick(position: Int, product: Product)
+        fun onClick(position: Int, store: Store)
 
     }
 }

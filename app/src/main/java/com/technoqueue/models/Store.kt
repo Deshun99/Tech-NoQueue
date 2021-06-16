@@ -8,7 +8,6 @@ data class Store (
     val user_id: String = "",
     val user_name: String = "",
     val title: String = "",
-    val items: ArrayList<Product> = ArrayList(),
     val description: String = "",
     val image: String = "",
     var store_id: String ="",

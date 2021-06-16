@@ -107,6 +107,12 @@ class AddProductActivity : BaseActivity(), View.OnClickListener {
             Constants.TECHNOQUEUE_PREFERENCES, Context.MODE_PRIVATE).getString(
             Constants.LOGGED_IN_USERNAME, "")!!
 
+        val productType = if (rb_standard.isChecked) {
+            Constants.STANDARD
+        } else {
+            Constants.HEALTHIER
+        }
+
         val product = Product(
             FirestoreClass().getCurrentUserID(),
             username,
@@ -114,7 +120,8 @@ class AddProductActivity : BaseActivity(), View.OnClickListener {
             et_product_price.text.toString().trim { it <= ' '},
             et_product_description.text.toString().trim { it <= ' '},
             et_product_quantity.text.toString().trim { it <= ' '},
-            mProductImageURL
+            mProductImageURL,
+            productType
         )
 
         FirestoreClass().uploadProductDetails(this,product)

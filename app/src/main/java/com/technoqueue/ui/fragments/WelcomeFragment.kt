@@ -38,7 +38,7 @@ class WelcomeFragment : BaseFragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.dashboard_welcome, menu)
+        inflater.inflate(R.menu.welcome_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -94,8 +94,6 @@ class WelcomeFragment : BaseFragment() {
     private fun getDashboardItemsList() {
         showProgressDialog(resources.getString(R.string.please_wait))
 
-        FirestoreClass().getDashboardItemsList(this@WelcomeFragment)
+        FirestoreClass().getHealthyProductsList(this@WelcomeFragment)
     }
-
-
 }

@@ -14,6 +14,7 @@ object Constants {
     const val PREFERENCES: String = "Prefs"
     const val LOGGED_IN_USERNAME: String = "logged_in_username"
     const val EXTRA_USER_DETAILS: String = "extra_user_details"
+    const val EXTRA_STORE_DETAILS: String = "extra_store_details"
     const val EXTRA_ADDRESS_DETAILS: String = "AddressDetails"
     const val EXTRA_SELECT_ADDRESS: String = "extra_select_address"
     const val READ_STORAGE_PERMISSION_CODE = 2
@@ -29,6 +30,7 @@ object Constants {
     const val FIRST_NAME: String = "firstName"
     const val LAST_NAME: String = "lastName"
     const val PRODUCT_ID: String = "product_id"
+    const val PRODUCT_TYPE: String = "product_type"
     const val USER_PROFILE_IMAGE:String = "User_Profile_Image"
     const val PRODUCT_IMAGE: String = "Product_Image"
     const val STORE_IMAGE: String = "Store_Image"
@@ -50,6 +52,8 @@ object Constants {
     const val EXTRA_MY_ORDER_DETAILS: String = "extra_MY_ORDER_DETAILS"
     const val SOLD_PRODUCTS: String = "sold products"
     const val EXTRA_SOLD_PRODUCT_DETAILS: String = "extra_sold_product_details"
+    const val STANDARD: String = "standard_item"
+    const val HEALTHIER: String = "healthier_choice"
 
     fun showImageChooser(activity: Activity) {
 

@@ -142,6 +142,7 @@
                     android:padding="@dimen/et_padding"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="@dimen/et_textSize" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -166,7 +167,49 @@
                     android:padding="@dimen/et_padding"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="@dimen/et_textSize" />
+
             </com.google.android.material.textfield.TextInputLayout>
+
+            <RadioGroup
+                android:id="@+id/rg_healthier_choice"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/profile_radio_button_height"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@id/btn_submit_add_product"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/til_product_quantity">
+
+                <com.technoqueue.utils.RadioButton
+                    android:id="@+id/rb_standard"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="@dimen/profile_radio_button_marginStartEnd"
+                    android:layout_weight="1"
+                    android:background="@drawable/drawable_gender_tab_selector"
+                    android:button="@null"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:text="Standard Item"
+                    android:textColor="@drawable/drawable_gender_tab_text_color_selector"
+                    android:textStyle="bold" />
+
+                <com.technoqueue.utils.RadioButton
+                    android:id="@+id/rb_healthier"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/profile_radio_button_marginStartEnd"
+                    android:layout_weight="1"
+                    android:background="@drawable/drawable_gender_tab_selector"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="Healthier Choice"
+                    android:textColor="@drawable/drawable_gender_tab_text_color_selector"
+                    android:textStyle="bold" />
+            </RadioGroup>
 
             <com.technoqueue.utils.Button
                 android:id="@+id/btn_submit_add_product"
@@ -188,7 +231,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/til_product_quantity" />
+                app:layout_constraintTop_toBottomOf="@id/rg_healthier_choice" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

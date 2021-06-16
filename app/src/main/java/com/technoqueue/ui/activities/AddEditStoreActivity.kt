@@ -30,7 +30,6 @@ class AddEditStoreActivity : BaseActivity(), View.OnClickListener {
 
     private var mSelectedImageFileURI: Uri? = null
     private var mStoreImageURL: String = ""
-    private lateinit var mProductsList: ArrayList<Product>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -111,13 +110,10 @@ class AddEditStoreActivity : BaseActivity(), View.OnClickListener {
             Constants.TECHNOQUEUE_PREFERENCES, Context.MODE_PRIVATE).getString(
             Constants.LOGGED_IN_USERNAME, "")!!
 
-        mProductsList = MyProductsListAdapter.getProducts()
-
         val store = Store(
             FirestoreClass().getCurrentUserID(),
             username,
             et_product_title.text.toString().trim { it <= ' '},
-            mProductsList,
             et_product_description.text.toString().trim { it <= ' '},
             mStoreImageURL
         )

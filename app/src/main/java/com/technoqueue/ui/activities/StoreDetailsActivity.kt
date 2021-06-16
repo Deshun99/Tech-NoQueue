@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.technoqueue.R
 import com.technoqueue.firestore.FirestoreClass
+import com.technoqueue.models.Product
 import com.technoqueue.models.Store
 import com.technoqueue.utils.Constants
 import com.technoqueue.utils.GlideLoader
@@ -53,7 +54,9 @@ class StoreDetailsActivity : BaseActivity(), View.OnClickListener {
             when (v.id) {
 
                 R.id.btn_go_to_menu->{
-                    startActivity(Intent(this@StoreDetailsActivity, ProductDetailsActivity::class.java))
+                    val intent = Intent(this@StoreDetailsActivity, DisplayProductsActivity::class.java)
+                    intent.putExtra(Constants.EXTRA_STORE_OWNER_ID, mStoreOwnerId)
+                    startActivity(intent)
                 }
 
                 R.id.btn_edit_description->{
