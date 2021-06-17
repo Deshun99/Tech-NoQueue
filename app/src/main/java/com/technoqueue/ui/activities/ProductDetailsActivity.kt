@@ -118,6 +118,7 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
         tv_product_details_title.text = product.title
         tv_product_details_price.text = "$${product.price}"
         tv_product_details_description.text = product.description
+        tv_product_type_description.text = product.product_type
         tv_product_details_stock_quantity.text = product.stock_quantity
 
         if(product.stock_quantity.toInt() == 0){

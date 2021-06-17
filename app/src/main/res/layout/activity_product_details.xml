@@ -108,6 +108,31 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_product_details_label"
                 tools:text="This is product details description." />
 
+            <com.technoqueue.utils.TextViewBold
+                android:id="@+id/tv_product_type_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/product_details_label_margin"
+                android:text="@string/lbl_product_type"
+                android:textColor="@color/item_value_text_color"
+                android:textSize="@dimen/product_details_label_textSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_product_details_description" />
+
+            <com.technoqueue.utils.TextView
+                android:id="@+id/tv_product_type_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/product_details_label_margin"
+                android:layout_marginEnd="@dimen/product_details_label_margin"
+                android:textColor="@color/colorSecondaryText"
+                android:textSize="@dimen/product_details_description_textSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_product_type_label"
+                tools:text="This is product type description." />
+
             <LinearLayout
                 android:id="@+id/ll_product_details_quantity"
                 android:layout_width="match_parent"
@@ -117,7 +142,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_product_details_description">
+                app:layout_constraintTop_toBottomOf="@id/tv_product_type_description">
 
                 <com.technoqueue.utils.TextViewBold
                     android:id="@+id/tv_product_details_quantity"

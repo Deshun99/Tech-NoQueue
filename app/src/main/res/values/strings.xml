@@ -134,4 +134,5 @@
     <string name="btn_lbl_edit_description">EDIT DESCRIPTION</string>
     <string name="edit_store_description">EDIT STORE DESCRIPTION</string>
     <string name="no_stores_added_yet">No store added yet!</string>
+    <string name="lbl_product_type">Product Type</string>
 </resources>
