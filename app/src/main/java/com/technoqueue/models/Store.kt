@@ -10,5 +10,5 @@ data class Store (
     val title: String = "",
     val description: String = "",
     val image: String = "",
-    var store_id: String ="",
+    var store_id: String = "",
 ): Parcelable

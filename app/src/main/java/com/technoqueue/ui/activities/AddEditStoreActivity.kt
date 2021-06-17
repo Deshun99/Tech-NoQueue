@@ -15,7 +15,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.technoqueue.R
 import com.technoqueue.firestore.FirestoreClass
-import com.technoqueue.models.Product
 import com.technoqueue.models.Store
 import com.technoqueue.ui.adapters.MyProductsListAdapter
 import com.technoqueue.utils.Constants
@@ -102,6 +101,7 @@ class AddEditStoreActivity : BaseActivity(), View.OnClickListener {
     fun imageUploadSuccess(imageURL: String) {
 
         mStoreImageURL = imageURL
+
         uploadStoreDetails()
     }
 
@@ -113,8 +113,8 @@ class AddEditStoreActivity : BaseActivity(), View.OnClickListener {
         val store = Store(
             FirestoreClass().getCurrentUserID(),
             username,
-            et_product_title.text.toString().trim { it <= ' '},
-            et_product_description.text.toString().trim { it <= ' '},
+            et_store_title.text.toString().trim { it <= ' '},
+            et_store_description.text.toString().trim { it <= ' '},
             mStoreImageURL
         )
 
@@ -162,6 +162,7 @@ class AddEditStoreActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
+
     private fun validateProductDetails(): Boolean {
         return when {
             mSelectedImageFileURI == null -> {
@@ -169,12 +170,12 @@ class AddEditStoreActivity : BaseActivity(), View.OnClickListener {
                 false
             }
 
-            TextUtils.isEmpty(et_product_title.text.toString().trim { it <= ' ' }) -> {
+            TextUtils.isEmpty(et_store_title.text.toString().trim { it <= ' ' }) -> {
                 showErrorSnackBar(resources.getString(R.string.err_msg_enter_product_title), true)
                 false
             }
 
-            TextUtils.isEmpty(et_product_description.text.toString().trim { it <= ' ' }) -> {
+            TextUtils.isEmpty(et_store_description.text.toString().trim { it <= ' ' }) -> {
                 showErrorSnackBar(resources.getString(R.string.err_msg_enter_product_description), true)
                 false
             }

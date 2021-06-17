@@ -175,6 +175,10 @@ class FirestoreClass {
                     is AddProductActivity -> {
                         activity.hideProgressDialog()
                     }
+
+                    is AddEditStoreActivity -> {
+                        activity.hideProgressDialog()
+                    }
                 }
 
                 Log.e(
@@ -219,7 +223,7 @@ class FirestoreClass {
 
                 Log.e(
                     activity.javaClass.simpleName,
-                    "Error while uploading the product details.",
+                    "Error while uploading the store details.",
                     e
                 )
             }
