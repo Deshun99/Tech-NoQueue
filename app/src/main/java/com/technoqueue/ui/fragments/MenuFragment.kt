@@ -3,19 +3,13 @@ package com.technoqueue.ui.fragments
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.technoqueue.R
 import com.technoqueue.firestore.FirestoreClass
-import com.technoqueue.models.Product
 import com.technoqueue.models.Store
 import com.technoqueue.ui.activities.AddProductActivity
 import com.technoqueue.ui.activities.AddEditStoreActivity
-import com.technoqueue.ui.activities.ProductDetailsActivity
 import com.technoqueue.ui.activities.StoreDetailsActivity
-import com.technoqueue.ui.adapters.DashboardItemsListAdapter
-import com.technoqueue.ui.adapters.MyProductsListAdapter
 import com.technoqueue.ui.adapters.StoreListAdapter
 import com.technoqueue.utils.Constants
 import kotlinx.android.synthetic.main.fragment_menu.*
@@ -167,11 +161,32 @@ class MenuFragment : BaseFragment() {
             }
 
             R.id.action_edit_storefront -> {
-
-                startActivity(Intent(activity, AddEditStoreActivity::class.java))
+                showProgressDialog(resources.getString(R.string.please_wait))
+                FirestoreClass().checkExistingStore(this@MenuFragment)
                 return true
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun verifyExistingStore(storeList: ArrayList<Store>): Boolean {
+
+        hideProgressDialog()
+        if (storeList.size > 0) {
+            for (store in storeList) {
+                if (store.user_id == FirestoreClass().getCurrentUserID()) {
+                    val intent = Intent(activity, AddEditStoreActivity::class.java)
+                    intent.putExtra(Constants.EXTRA_STORE_DETAILS, store)
+                    intent.putExtra(Constants.EXTRA_STORE_ID, store.store_id)
+                    startActivity(intent)
+                    return true
+                }
+            }
+            startActivity(Intent(activity, AddEditStoreActivity::class.java))
+            return true
+        } else {
+            startActivity(Intent(activity, AddEditStoreActivity::class.java))
+            return true
+        }
     }
 }

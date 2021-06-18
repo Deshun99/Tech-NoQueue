@@ -131,11 +131,9 @@ class FirestoreClass {
             }
     }
 
-    /*
-    fun updateStoreDetails(activity: Activity, userHashMap: HashMap<String, Any>) {
+    fun updateStoreDetails(activity: Activity, userHashMap: HashMap<String, Any>, storeId: String) {
         mFireStore.collection(Constants.STORES)
-            .whereEqualTo(Constants.USER_ID, getCurrentUserID())
-            .get()
+            .document(storeId)
             .update(userHashMap)
             .addOnSuccessListener {
                 when (activity) {
@@ -159,7 +157,6 @@ class FirestoreClass {
                 )
             }
         }
-     */
 
     fun uploadImageToCloudStorage(activity: Activity, imageFileURI: Uri?, imageType: String) {
 
@@ -804,6 +801,38 @@ class FirestoreClass {
                 when(fragment) {
                     is MenuFragment -> {
                         fragment.successStoreListFromFireStore(storeList)
+                    }
+
+                }
+            }
+            .addOnFailureListener { e ->
+                when (fragment) {
+                    is MenuFragment -> {
+                        fragment.hideProgressDialog()
+                    }
+                }
+
+                Log.e("Get Store List", "Error while getting store list.", e)
+            }
+    }
+
+    fun checkExistingStore(fragment: Fragment) {
+        mFireStore.collection(Constants.STORES)
+            .get()
+            .addOnSuccessListener { document ->
+                Log.e("Store List", document.documents.toString())
+                val storeList: ArrayList<Store> = ArrayList()
+                for (i in document.documents) {
+
+                    val store = i.toObject(Store::class.java)
+                    store!!.store_id = i.id
+
+                    storeList.add(store)
+                }
+
+                when(fragment) {
+                    is MenuFragment -> {
+                        fragment.verifyExistingStore(storeList)
                     }
 
                 }

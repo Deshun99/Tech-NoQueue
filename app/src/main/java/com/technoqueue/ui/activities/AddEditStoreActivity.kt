@@ -27,6 +27,7 @@ class AddEditStoreActivity : BaseActivity(), View.OnClickListener {
 
     private var mStoreDetails: Store? = null
     private var mSelectedImageFileURI: Uri? = null
+    private var mStoreId: String = ""
     private var mStoreImageURL: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +37,11 @@ class AddEditStoreActivity : BaseActivity(), View.OnClickListener {
 
         if (intent.hasExtra(Constants.EXTRA_STORE_DETAILS)) {
             mStoreDetails = intent.getParcelableExtra(Constants.EXTRA_STORE_DETAILS)!!
+        }
+
+        if (intent.hasExtra(Constants.EXTRA_STORE_ID)) {
+            mStoreId =
+                intent.getStringExtra(Constants.EXTRA_STORE_ID)!!
         }
 
         if (mStoreDetails != null) {
@@ -148,12 +154,11 @@ class AddEditStoreActivity : BaseActivity(), View.OnClickListener {
                 storeHashMap[Constants.IMAGE] = mStoreImageURL
             }
 
-            /*
             FirestoreClass().updateStoreDetails(
                 this@AddEditStoreActivity,
-                storeHashMap
+                storeHashMap,
+                mStoreId
             )
-             */
         }
     }
 
