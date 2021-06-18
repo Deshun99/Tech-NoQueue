@@ -34,7 +34,6 @@ class StoreDetailsActivity : BaseActivity(), View.OnClickListener {
                 intent.getStringExtra(Constants.EXTRA_STORE_OWNER_ID)!!
         }
 
-        setupActionBar()
 
         if (FirestoreClass().getCurrentUserID() == mStoreOwnerId) {
             btn_edit_description.visibility = View.VISIBLE
@@ -60,7 +59,9 @@ class StoreDetailsActivity : BaseActivity(), View.OnClickListener {
                 }
 
                 R.id.btn_edit_description->{
-                    startActivity(Intent(this@StoreDetailsActivity, AddEditStoreActivity::class.java))
+                    val intent = Intent(this@StoreDetailsActivity, AddEditStoreActivity::class.java)
+                    intent.putExtra(Constants.EXTRA_STORE_DETAILS, mStoreDetails)
+                    startActivity(intent)
                 }
             }
         }
@@ -87,6 +88,8 @@ class StoreDetailsActivity : BaseActivity(), View.OnClickListener {
 
     fun storeDetailsSuccess(store: Store) {
 
+        hideProgressDialog()
+
         mStoreDetails = store
 
         GlideLoader(this@StoreDetailsActivity).loadProductPicture(
@@ -94,7 +97,7 @@ class StoreDetailsActivity : BaseActivity(), View.OnClickListener {
             iv_store_detail_image
         )
 
-        tv_title.text = store.title
+        tv_store_name.text = store.title
         tv_store_details_description.text = store.description
     }
 }

@@ -16,17 +16,16 @@ import androidx.core.content.ContextCompat
 import com.technoqueue.R
 import com.technoqueue.firestore.FirestoreClass
 import com.technoqueue.models.Store
-import com.technoqueue.ui.adapters.MyProductsListAdapter
 import com.technoqueue.utils.Constants
 import com.technoqueue.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_add_edit_store.*
 import kotlinx.android.synthetic.main.activity_add_product.*
-import kotlinx.android.synthetic.main.activity_add_product.et_product_description
-import kotlinx.android.synthetic.main.activity_add_product.et_product_title
+import kotlinx.android.synthetic.main.activity_user_profile.*
 import java.io.IOException
 
 class AddEditStoreActivity : BaseActivity(), View.OnClickListener {
 
+    private var mStoreDetails: Store? = null
     private var mSelectedImageFileURI: Uri? = null
     private var mStoreImageURL: String = ""
 
@@ -34,6 +33,16 @@ class AddEditStoreActivity : BaseActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_edit_store)
         setupActionBar()
+
+        if (intent.hasExtra(Constants.EXTRA_STORE_DETAILS)) {
+            mStoreDetails = intent.getParcelableExtra(Constants.EXTRA_STORE_DETAILS)!!
+        }
+
+        if (mStoreDetails != null) {
+            GlideLoader(this@AddEditStoreActivity).loadUserPicture(mStoreDetails!!.image, iv_store_image)
+            et_store_title.setText(mStoreDetails!!.title)
+            et_store_description.setText(mStoreDetails!!.description)
+        }
 
         iv_store_image.setOnClickListener(this)
         btn_submit_changes.setOnClickListener(this)
@@ -72,20 +81,24 @@ class AddEditStoreActivity : BaseActivity(), View.OnClickListener {
                 }
 
                 R.id.btn_submit_changes -> {
-                    if(validateProductDetails()) {
-                        uploadStoreImage()
+                    if (validateStoreDetails()) {
+
+                        showProgressDialog(resources.getString(R.string.please_wait))
+
+                        if (mSelectedImageFileURI != null) {
+
+                            FirestoreClass().uploadImageToCloudStorage(
+                                this@AddEditStoreActivity,
+                                mSelectedImageFileURI,
+                                Constants.USER_PROFILE_IMAGE
+                            )
+                        } else {
+                            uploadStoreDetails()
+                        }
                     }
                 }
             }
         }
-    }
-
-    private fun uploadStoreImage() {
-        showProgressDialog(resources.getString(R.string.please_wait))
-        FirestoreClass().uploadImageToCloudStorage(
-            this@AddEditStoreActivity,
-            mSelectedImageFileURI,
-            Constants.STORE_IMAGE)
     }
 
     fun storeUploadSuccess() {
@@ -99,27 +112,49 @@ class AddEditStoreActivity : BaseActivity(), View.OnClickListener {
     }
 
     fun imageUploadSuccess(imageURL: String) {
-
         mStoreImageURL = imageURL
-
         uploadStoreDetails()
     }
 
     private fun uploadStoreDetails() {
-        val username = this.getSharedPreferences(
-            Constants.TECHNOQUEUE_PREFERENCES, Context.MODE_PRIVATE).getString(
-            Constants.LOGGED_IN_USERNAME, "")!!
+        if (mStoreDetails == null) {
+            val username = this.getSharedPreferences(
+                Constants.TECHNOQUEUE_PREFERENCES, Context.MODE_PRIVATE).getString(
+                Constants.LOGGED_IN_USERNAME, "")!!
 
-        val store = Store(
-            FirestoreClass().getCurrentUserID(),
-            username,
-            et_store_title.text.toString().trim { it <= ' '},
-            et_store_description.text.toString().trim { it <= ' '},
-            mStoreImageURL
-        )
+            val store = Store(
+                FirestoreClass().getCurrentUserID(),
+                username,
+                et_store_title.text.toString().trim { it <= ' '},
+                et_store_description.text.toString().trim { it <= ' '},
+                mStoreImageURL
+            )
 
-        FirestoreClass().uploadStoreDetails(this@AddEditStoreActivity, store)
+            FirestoreClass().uploadStoreDetails(this@AddEditStoreActivity, store)
+        } else {
+            val storeHashMap = HashMap<String, Any>()
 
+            val title = et_store_title.text.toString().trim { it <= ' ' }
+            if (title != mStoreDetails!!.title) {
+                storeHashMap[Constants.TITLE] = title
+            }
+
+            val description = et_store_description.text.toString().trim { it <= ' ' }
+            if (description != mStoreDetails!!.description) {
+                storeHashMap[Constants.DESCRIPTION] = description
+            }
+
+            if (mStoreImageURL.isNotEmpty()) {
+                storeHashMap[Constants.IMAGE] = mStoreImageURL
+            }
+
+            /*
+            FirestoreClass().updateStoreDetails(
+                this@AddEditStoreActivity,
+                storeHashMap
+            )
+             */
+        }
     }
 
     override fun onRequestPermissionsResult(
@@ -163,20 +198,15 @@ class AddEditStoreActivity : BaseActivity(), View.OnClickListener {
     }
 
 
-    private fun validateProductDetails(): Boolean {
+    private fun validateStoreDetails(): Boolean {
         return when {
-            mSelectedImageFileURI == null -> {
-                showErrorSnackBar(resources.getString(R.string.err_msg_select_product_image), true)
-                false
-            }
-
             TextUtils.isEmpty(et_store_title.text.toString().trim { it <= ' ' }) -> {
-                showErrorSnackBar(resources.getString(R.string.err_msg_enter_product_title), true)
+                showErrorSnackBar(resources.getString(R.string.err_msg_enter_store_title), true)
                 false
             }
 
             TextUtils.isEmpty(et_store_description.text.toString().trim { it <= ' ' }) -> {
-                showErrorSnackBar(resources.getString(R.string.err_msg_enter_product_description), true)
+                showErrorSnackBar(resources.getString(R.string.err_msg_enter_store_description), true)
                 false
             }
             else -> {

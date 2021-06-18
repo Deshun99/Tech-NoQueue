@@ -135,4 +135,7 @@
     <string name="edit_store_description">EDIT STORE DESCRIPTION</string>
     <string name="no_stores_added_yet">No store added yet!</string>
     <string name="lbl_product_type">Product Type</string>
+    <string name="err_msg_select_store_image">Please select a store image.</string>
+    <string name="err_msg_enter_store_title">Please enter store title.</string>
+    <string name="err_msg_enter_store_description">Please enter store description.</string>
 </resources>

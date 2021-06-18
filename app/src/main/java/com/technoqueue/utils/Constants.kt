@@ -55,6 +55,8 @@ object Constants {
     const val STANDARD: String = "Standard Item"
     const val HEALTHIER: String = "Healthier Choice"
     const val STORE: String = "store"
+    const val TITLE: String = "title"
+    const val DESCRIPTION: String = "description"
 
     fun showImageChooser(activity: Activity) {
 

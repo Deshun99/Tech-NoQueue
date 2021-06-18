@@ -131,6 +131,36 @@ class FirestoreClass {
             }
     }
 
+    /*
+    fun updateStoreDetails(activity: Activity, userHashMap: HashMap<String, Any>) {
+        mFireStore.collection(Constants.STORES)
+            .whereEqualTo(Constants.USER_ID, getCurrentUserID())
+            .get()
+            .update(userHashMap)
+            .addOnSuccessListener {
+                when (activity) {
+                    is AddEditStoreActivity -> {
+                        activity.storeUploadSuccess()
+                    }
+                }
+            }
+            .addOnFailureListener { e ->
+
+                when (activity) {
+                    is AddEditStoreActivity -> {
+                        activity.hideProgressDialog()
+                    }
+                }
+
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while updating the user details.",
+                    e
+                )
+            }
+        }
+     */
+
     fun uploadImageToCloudStorage(activity: Activity, imageFileURI: Uri?, imageType: String) {
 
         val sRef: StorageReference = FirebaseStorage.getInstance().reference.child(
