@@ -7,8 +7,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.technoqueue.R
 import com.technoqueue.firestore.FirestoreClass
 import com.technoqueue.models.Product
-import com.technoqueue.models.User
-import com.technoqueue.ui.adapters.MyProductsListAdapter
 import com.technoqueue.ui.adapters.StoreProductsListAdapter
 import com.technoqueue.utils.Constants
 import kotlinx.android.synthetic.main.activity_display_products.*

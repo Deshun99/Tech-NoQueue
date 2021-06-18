@@ -2,6 +2,7 @@ package com.technoqueue.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import com.technoqueue.R
 import com.technoqueue.firestore.FirestoreClass
@@ -31,6 +32,9 @@ class StoreDetailsActivity : BaseActivity(), View.OnClickListener {
                 intent.getStringExtra(Constants.EXTRA_STORE_OWNER_ID)!!
         }
 
+        Log.e(mStoreOwnerId, "Testing")
+
+        btn_go_to_menu.visibility = View.VISIBLE
 
         if (FirestoreClass().getCurrentUserID() == mStoreOwnerId) {
             btn_edit_description.visibility = View.VISIBLE
@@ -53,6 +57,7 @@ class StoreDetailsActivity : BaseActivity(), View.OnClickListener {
                     val intent = Intent(this@StoreDetailsActivity, DisplayProductsActivity::class.java)
                     intent.putExtra(Constants.EXTRA_STORE_OWNER_ID, mStoreOwnerId)
                     startActivity(intent)
+                    finish()
                 }
 
                 R.id.btn_edit_description->{
