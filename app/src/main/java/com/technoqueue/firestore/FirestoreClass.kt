@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -98,6 +100,38 @@ class FirestoreClass {
 
                 Log.e(
                     activity.javaClass.simpleName,
+                    "Error while getting user details.",
+                    e
+                )
+            }
+    }
+
+    fun getAccType(fragment: Fragment, menu: Menu, inflater: MenuInflater) {
+
+        mFireStore.collection(Constants.USERS)
+            .document(getCurrentUserID())
+            .get()
+            .addOnSuccessListener { document ->
+
+                Log.i(fragment.javaClass.simpleName, document.toString())
+
+                val accType = document.toObject(User::class.java)!!.accountType
+
+                when (fragment) {
+                    is MenuFragment -> {
+                        fragment.applyChanges(accType, menu, inflater)
+                    }
+                }
+            }
+            .addOnFailureListener { e ->
+                when (fragment) {
+                    is MenuFragment -> {
+                        fragment.hideProgressDialog()
+                    }
+                }
+
+                Log.e(
+                    fragment.javaClass.simpleName,
                     "Error while getting user details.",
                     e
                 )

@@ -144,9 +144,15 @@ class MenuFragment : BaseFragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
 
-        inflater.inflate(R.menu.add_product_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
+        FirestoreClass().getAccType(this@MenuFragment, menu, inflater)
 
+    }
+
+    fun applyChanges(accType: String, menu: Menu, inflater: MenuInflater) {
+        if (accType.equals("vendor")) {
+            inflater.inflate(R.menu.add_product_menu, menu)
+        }
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
