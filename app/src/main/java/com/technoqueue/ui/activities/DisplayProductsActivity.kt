@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.technoqueue.R
 import com.technoqueue.firestore.FirestoreClass
 import com.technoqueue.models.Product
+import com.technoqueue.models.Store
 import com.technoqueue.models.User
 import com.technoqueue.ui.adapters.MyProductsListAdapter
 import com.technoqueue.ui.adapters.StoreProductsListAdapter
@@ -16,24 +17,25 @@ import kotlinx.android.synthetic.main.activity_user_profile.*
 
 class DisplayProductsActivity : BaseActivity() {
 
-    private lateinit var mStoreOwnerId: String
+    private lateinit var mStoreDetails: Store
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_display_products)
 
-        if (intent.hasExtra(Constants.EXTRA_STORE_OWNER_ID)) {
-            mStoreOwnerId = intent.getParcelableExtra(Constants.EXTRA_STORE_OWNER_ID)!!
+        if (intent.hasExtra(Constants.EXTRA_STORE_DETAILS)) {
+            mStoreDetails = intent.getParcelableExtra(Constants.EXTRA_STORE_DETAILS)!!
         }
 
-        getProductListFromFireStore(mStoreOwnerId)
+        getProductListFromFireStore(mStoreDetails.user_id)
 
         setupActionBar()
     }
 
     private fun setupActionBar() {
 
-        setSupportActionBar(toolbar_user_profile_activity)
+
+        setSupportActionBar(toolbar_display_products_activity)
 
         val actionBar = supportActionBar
         if (actionBar != null) {
@@ -41,7 +43,7 @@ class DisplayProductsActivity : BaseActivity() {
             actionBar.setHomeAsUpIndicator(R.drawable.ic_white_color_back_24dp)
         }
 
-        toolbar_user_profile_activity.setNavigationOnClickListener { onBackPressed() }
+        toolbar_display_products_activity.setNavigationOnClickListener { onBackPressed() }
     }
 
     private fun getProductListFromFireStore(storeOwnerId: String) {

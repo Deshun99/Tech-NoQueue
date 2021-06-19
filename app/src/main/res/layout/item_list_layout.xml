@@ -27,8 +27,6 @@
             android:scaleType="fitXY" />
     </LinearLayout>
 
-    <!--TODO Step 2: Update the item list design.-->
-    <!--START-->
     <LinearLayout
         android:id="@+id/ll_product_details"
         android:layout_width="0dp"
@@ -73,5 +71,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/ll_product_details"
         app:layout_constraintTop_toTopOf="parent" />
-    <!--END-->
 </androidx.constraintlayout.widget.ConstraintLayout>

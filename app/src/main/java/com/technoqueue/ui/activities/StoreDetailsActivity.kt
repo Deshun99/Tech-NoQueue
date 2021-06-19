@@ -31,6 +31,9 @@ class StoreDetailsActivity : BaseActivity(), View.OnClickListener {
                 intent.getStringExtra(Constants.EXTRA_STORE_OWNER_ID)!!
         }
 
+        setupActionBar()
+
+        btn_go_to_menu.visibility = View.VISIBLE
 
         if (FirestoreClass().getCurrentUserID() == mStoreOwnerId) {
             btn_edit_description.visibility = View.VISIBLE
@@ -51,7 +54,7 @@ class StoreDetailsActivity : BaseActivity(), View.OnClickListener {
 
                 R.id.btn_go_to_menu->{
                     val intent = Intent(this@StoreDetailsActivity, DisplayProductsActivity::class.java)
-                    intent.putExtra(Constants.EXTRA_STORE_OWNER_ID, mStoreOwnerId)
+                    intent.putExtra(Constants.EXTRA_STORE_DETAILS, mStoreDetails)
                     startActivity(intent)
                 }
 
