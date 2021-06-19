@@ -649,10 +649,7 @@ class FirestoreClass {
                 cart.image,
                 order.title,
                 order.order_datetime,
-                order.sub_total_amount,
-                order.shipping_charge,
                 order.total_amount,
-                order.address
             )
 
             val documentReference = mFireStore.collection(Constants.SOLD_PRODUCTS)

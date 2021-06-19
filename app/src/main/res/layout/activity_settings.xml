@@ -39,7 +39,7 @@
                     android:gravity="center"
                     android:paddingStart="@dimen/toolbar_title_paddingStart"
                     android:paddingEnd="0dp"
-                    android:text="@string/title_settings"
+                    android:text="SETTINGS"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/toolbar_title_text_size"
                     android:textStyle="bold" />
@@ -131,39 +131,11 @@
             android:textSize="@dimen/settings_info_textSize"
             tools:text="123456789" />
 
-        <LinearLayout
-            android:id="@+id/ll_address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_mobile_number"
-            android:layout_margin="@dimen/settings_address_margin"
-            android:background="@drawable/item_grey_border_background"
-            android:foreground="?attr/selectableItemBackground"
-            android:orientation="horizontal"
-            android:padding="@dimen/settings_address_padding">
-
-            <com.technoqueue.utils.TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/settings_lbl_addresses_margin"
-                android:layout_weight="1"
-                android:text="@string/lbl_addresses"
-                android:textColor="@color/colorSecondaryText"
-                android:textSize="@dimen/settings_lbl_addresses_textSize" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/content_description"
-                android:src="@drawable/ic_vector_chevron_right" />
-
-        </LinearLayout>
-
         <com.technoqueue.utils.Button
             android:id="@+id/btn_logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/ll_address"
+            android:layout_below="@+id/tv_mobile_number"
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/settings_button_marginStartEnd"
             android:layout_marginTop="@dimen/settings_button_marginTopBottom"

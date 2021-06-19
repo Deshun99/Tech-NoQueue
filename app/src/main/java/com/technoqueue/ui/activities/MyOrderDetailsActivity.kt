@@ -103,22 +103,6 @@ class MyOrderDetailsActivity : AppCompatActivity() {
             CartItemsListAdapter(this@MyOrderDetailsActivity, orderDetails.items, false)
         rv_my_order_items_list.adapter = cartListAdapter
 
-        tv_my_order_details_address_type.text = orderDetails.address.type
-        tv_my_order_details_full_name.text = orderDetails.address.name
-        tv_my_order_details_address.text =
-            "${orderDetails.address.address}, ${orderDetails.address.zipCode}"
-        tv_my_order_details_additional_note.text = orderDetails.address.additionalNote
-
-        if (orderDetails.address.otherDetails.isNotEmpty()) {
-            tv_my_order_details_other_details.visibility = View.VISIBLE
-            tv_my_order_details_other_details.text = orderDetails.address.otherDetails
-        } else {
-            tv_my_order_details_other_details.visibility = View.GONE
-        }
-        tv_my_order_details_mobile_number.text = orderDetails.address.mobileNumber
-
-        tv_order_details_sub_total.text = orderDetails.sub_total_amount
-        tv_order_details_shipping_charge.text = orderDetails.shipping_charge
         tv_order_details_total_amount.text = orderDetails.total_amount
     }
 }

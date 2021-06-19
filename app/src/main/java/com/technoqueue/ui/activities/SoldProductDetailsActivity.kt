@@ -62,23 +62,7 @@ class SoldProductDetailsActivity : BaseActivity() {
         tv_product_item_name.text = productDetails.title
         tv_product_item_price.text ="$${productDetails.price}"
         tv_sold_product_quantity.text = productDetails.sold_quantity
-
-        tv_sold_details_address_type.text = productDetails.address.type
-        tv_sold_details_full_name.text = productDetails.address.name
-        tv_sold_details_address.text =
-            "${productDetails.address.address}, ${productDetails.address.zipCode}"
-        tv_sold_details_additional_note.text = productDetails.address.additionalNote
-
-        if (productDetails.address.otherDetails.isNotEmpty()) {
-            tv_sold_details_other_details.visibility = View.VISIBLE
-            tv_sold_details_other_details.text = productDetails.address.otherDetails
-        } else {
-            tv_sold_details_other_details.visibility = View.GONE
-        }
-        tv_sold_details_mobile_number.text = productDetails.address.mobileNumber
-
-        tv_sold_product_sub_total.text = productDetails.sub_total_amount
-        tv_sold_product_shipping_charge.text = productDetails.shipping_charge
+        
         tv_sold_product_total_amount.text = productDetails.total_amount
     }
 }

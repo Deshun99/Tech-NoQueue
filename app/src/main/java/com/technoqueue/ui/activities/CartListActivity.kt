@@ -28,8 +28,7 @@ class CartListActivity : BaseActivity() {
         setupActionBar()
 
         btn_checkout.setOnClickListener {
-            val intent = Intent(this@CartListActivity, AddressListActivity::class.java)
-            intent.putExtra(Constants.EXTRA_SELECT_ADDRESS, true)
+            val intent = Intent(this@CartListActivity, CheckoutActivity::class.java)
             startActivity(intent)
         }
     }
@@ -99,7 +98,7 @@ class CartListActivity : BaseActivity() {
             val cartListAdapter = CartItemsListAdapter(this@CartListActivity, mCartListItems, true)
             rv_cart_items_list.adapter = cartListAdapter
 
-            var subTotal: Double = 0.0
+            var total: Double = 0.0
 
             for (item in mCartListItems) {
 
@@ -109,18 +108,13 @@ class CartListActivity : BaseActivity() {
                     val price = item.price.toDouble()
                     val quantity = item.cart_quantity.toInt()
 
-                    subTotal += (price * quantity)
+                    total += (price * quantity)
                 }
             }
 
-            tv_sub_total.text = "$$subTotal"
-
-            tv_shipping_charge.text = "$10.0"
-
-            if (subTotal > 0) {
+            if (total > 0) {
                 ll_checkout.visibility = View.VISIBLE
 
-                val total = subTotal + 10
                 tv_total_amount.text = "$$total"
             } else {
                 ll_checkout.visibility = View.GONE

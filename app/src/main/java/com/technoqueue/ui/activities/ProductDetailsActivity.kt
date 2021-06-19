@@ -40,12 +40,7 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
 
         setupActionBar()
 
-        if (FirestoreClass().getCurrentUserID() == mProductOwnerId) {
-            btn_add_to_cart.visibility = View.GONE
-            btn_go_to_cart.visibility = View.GONE
-        } else {
-            btn_add_to_cart.visibility = View.VISIBLE
-        }
+        btn_add_to_cart.visibility = View.VISIBLE
 
         btn_add_to_cart.setOnClickListener(this)
         btn_go_to_cart.setOnClickListener(this)
