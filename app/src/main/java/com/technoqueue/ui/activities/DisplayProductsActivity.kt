@@ -1,19 +1,21 @@
 package com.technoqueue.ui.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageButton
+import android.widget.LinearLayout
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.technoqueue.R
 import com.technoqueue.firestore.FirestoreClass
 import com.technoqueue.models.Product
 import com.technoqueue.models.Store
-import com.technoqueue.models.User
-import com.technoqueue.ui.adapters.MyProductsListAdapter
 import com.technoqueue.ui.adapters.StoreProductsListAdapter
 import com.technoqueue.utils.Constants
 import kotlinx.android.synthetic.main.activity_display_products.*
 import kotlinx.android.synthetic.main.activity_user_profile.*
+
 
 class DisplayProductsActivity : BaseActivity() {
 
@@ -30,6 +32,51 @@ class DisplayProductsActivity : BaseActivity() {
         getProductListFromFireStore(mStoreDetails.user_id)
 
         setupActionBar()
+    }
+
+    fun deleteProduct(productID: String) {
+        showAlertDialogToDeleteProduct(productID)
+    }
+
+    fun productDeleteSuccess() {
+        hideProgressDialog()
+
+        Toast.makeText(
+            this@DisplayProductsActivity,
+            resources.getString(R.string.product_delete_success_message),
+            Toast.LENGTH_SHORT
+        ).show()
+
+        getProductListFromFireStore(mStoreDetails.user_id)
+    }
+
+    private fun showAlertDialogToDeleteProduct(productID: String) {
+
+        val builder = AlertDialog.Builder(this@DisplayProductsActivity)
+
+        builder.setTitle(resources.getString(R.string.delete_dialog_title))
+
+        builder.setMessage(resources.getString(R.string.delete_dialog_message))
+        builder.setIcon(android.R.drawable.ic_dialog_alert)
+
+        builder.setPositiveButton(resources.getString(R.string.yes)) { dialogInterface, _ ->
+
+            showProgressDialog(resources.getString(R.string.please_wait))
+
+            FirestoreClass().deleteProduct(this@DisplayProductsActivity, productID)
+
+            dialogInterface.dismiss()
+        }
+
+        builder.setNegativeButton(resources.getString(R.string.no)) { dialogInterface, _ ->
+
+            dialogInterface.dismiss()
+        }
+
+        val alertDialog: AlertDialog = builder.create()
+
+        alertDialog.setCancelable(false)
+        alertDialog.show()
     }
 
     private fun setupActionBar() {
@@ -61,7 +108,7 @@ class DisplayProductsActivity : BaseActivity() {
             rv_my_product_items.layoutManager = LinearLayoutManager(this)
             rv_my_product_items.setHasFixedSize(true)
 
-            val adapterProducts = StoreProductsListAdapter(this, productsList, this)
+            val adapterProducts = StoreProductsListAdapter(this, productsList, this, mStoreDetails)
             rv_my_product_items.adapter = adapterProducts
         } else {
             rv_my_product_items.visibility = View.GONE

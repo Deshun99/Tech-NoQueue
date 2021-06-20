@@ -323,25 +323,25 @@ class FirestoreClass {
                 Log.e("Get Product List", "Error while getting product list.", e)
             }
     }
+     */
 
-    fun deleteProduct(fragment: MenuFragment, productId: String) {
+    fun deleteProduct(activity: DisplayProductsActivity, productId: String) {
         mFireStore.collection(Constants.PRODUCTS)
             .document(productId)
             .delete()
             .addOnSuccessListener {
-                fragment.productDeleteSuccess()
+                activity.productDeleteSuccess()
             }.addOnFailureListener {
                 e ->
-                fragment.hideProgressDialog()
+                activity.hideProgressDialog()
 
                 Log.e(
-                    fragment.requireActivity().javaClass.simpleName,
+                    activity.javaClass.simpleName,
                     "Error while deleting the product.",
                     e
                 )
             }
     }
-     */
 
     fun getProductDetails(activity: ProductDetailsActivity, productId: String) {
 
