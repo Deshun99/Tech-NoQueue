@@ -221,7 +221,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/my_order_details_content_marginStartEnd"
-                    android:text="@string/lbl_cash_on_delivery"
+                    android:text="Cash Upon Collection"
                     android:textColor="@color/colorAccent"
                     android:textSize="@dimen/lbl_order_details_textSize" />
             </LinearLayout>
