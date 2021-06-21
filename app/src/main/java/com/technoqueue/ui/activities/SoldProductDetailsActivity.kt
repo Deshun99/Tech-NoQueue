@@ -3,9 +3,11 @@ package com.technoqueue.ui.activities
 import android.os.Bundle
 import android.view.View
 import com.technoqueue.R
+import com.technoqueue.firestore.FirestoreClass
 import com.technoqueue.models.SoldProduct
 import com.technoqueue.utils.Constants
 import com.technoqueue.utils.GlideLoader
+import kotlinx.android.synthetic.main.activity_product_details.*
 import kotlinx.android.synthetic.main.activity_sold_product_details.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -28,6 +30,11 @@ class SoldProductDetailsActivity : BaseActivity() {
         setupActionBar()
 
         setupUI(productDetails)
+
+        btn_complete_order.visibility = View.VISIBLE
+
+        btn_complete_order.setOnClickListener {
+        }
     }
 
     private fun setupActionBar() {

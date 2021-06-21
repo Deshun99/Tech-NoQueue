@@ -119,7 +119,8 @@ class CheckoutActivity : BaseActivity() {
             "My order ${System.currentTimeMillis()}",
             mCartItemsList[0].image,
             mTotalAmount.toString(),
-            System.currentTimeMillis()
+            System.currentTimeMillis(),
+            "Processing"
         )
 
         FirestoreClass().placeOrder(this@CheckoutActivity, mOrderDetails)
