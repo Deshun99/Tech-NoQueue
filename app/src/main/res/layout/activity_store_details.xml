@@ -101,6 +101,31 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_store_details_label"
                 tools:text="This is store details description." />
 
+            <com.technoqueue.utils.TextViewBold
+                android:id="@+id/tv_queue_details_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/product_details_label_margin"
+                android:text="Current Queue Length"
+                android:textColor="@color/item_value_text_color"
+                android:textSize="@dimen/product_details_label_textSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_store_details_description" />
+
+            <com.technoqueue.utils.TextView
+                android:id="@+id/tv_queue_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/product_details_label_margin"
+                android:layout_marginEnd="@dimen/product_details_label_margin"
+                android:textColor="@color/colorSecondaryText"
+                android:textSize="@dimen/product_details_description_textSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_queue_details_label"
+                tools:text="This is the current queue length." />
+
             <com.technoqueue.utils.Button
                 android:id="@+id/btn_go_to_menu"
                 android:layout_width="match_parent"
@@ -121,7 +146,7 @@
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_store_details_description"
+                app:layout_constraintTop_toBottomOf="@+id/tv_queue_details"
                 tools:visibility="visible" />
 
             <com.technoqueue.utils.Button

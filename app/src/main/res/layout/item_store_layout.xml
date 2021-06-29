@@ -40,7 +40,7 @@
         android:paddingEnd="@dimen/dashboard_item_paddingStartEnd"
         android:paddingBottom="@dimen/dashboard_item_paddingTopBottom">
 
-        <com.technoqueue.utils.TextViewBold
+        <com.technoqueue.utils.TextView
             android:id="@+id/tv_dashboard_item_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

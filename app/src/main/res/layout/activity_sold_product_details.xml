@@ -112,6 +112,29 @@
                         tools:text="20 Oct 2020" />
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.technoqueue.utils.TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Status"
+                        android:textColor="@color/colorDarkGrey"
+                        android:textSize="@dimen/sold_details_label_value_textSize" />
+
+                    <com.technoqueue.utils.TextView
+                        android:id="@+id/tv_sold_product_details_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorSecondaryText"
+                        android:textSize="@dimen/sold_details_label_value_textSize"
+                        tools:text="Pending" />
+                </LinearLayout>
+
             </LinearLayout>
 
             <com.technoqueue.utils.TextView

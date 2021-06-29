@@ -61,6 +61,7 @@ class SoldProductDetailsActivity : BaseActivity() {
         val calendar: Calendar = Calendar.getInstance()
         calendar.timeInMillis = productDetails.order_date
         tv_sold_product_details_date.text = formatter.format(calendar.time)
+        tv_sold_product_details_status.text = productDetails.status
 
         GlideLoader(this@SoldProductDetailsActivity).loadProductPicture(
             productDetails.image,

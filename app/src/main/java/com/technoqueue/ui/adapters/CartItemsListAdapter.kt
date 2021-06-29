@@ -14,6 +14,7 @@ import com.technoqueue.ui.activities.CartListActivity
 import com.technoqueue.utils.Constants
 import com.technoqueue.utils.GlideLoader
 import kotlinx.android.synthetic.main.item_cart_layout.view.*
+import kotlinx.android.synthetic.main.item_list_layout.view.*
 
 open class CartItemsListAdapter(
     private val context: Context,
@@ -40,6 +41,7 @@ open class CartItemsListAdapter(
 
             GlideLoader(context).loadProductPicture(model.image, holder.itemView.iv_cart_item_image)
 
+            holder.itemView.tv_cart_item_store.text = model.store
             holder.itemView.tv_cart_item_title.text = model.title
             holder.itemView.tv_cart_item_price.text = "$${model.price}"
             holder.itemView.tv_cart_quantity.text = model.cart_quantity

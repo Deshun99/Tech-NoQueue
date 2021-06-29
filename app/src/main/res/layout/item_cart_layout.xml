@@ -37,6 +37,14 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
+        <com.technoqueue.utils.TextViewBold
+            android:id="@+id/tv_cart_item_store"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/item_value_text_color"
+            android:textSize="@dimen/cart_item_title_textSize"
+            tools:text="Cart Item Store" />
+
         <com.technoqueue.utils.TextView
             android:id="@+id/tv_cart_item_title"
             android:layout_width="match_parent"
@@ -49,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.technoqueue.utils.TextViewBold
+            <com.technoqueue.utils.TextView
                 android:id="@+id/tv_cart_item_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

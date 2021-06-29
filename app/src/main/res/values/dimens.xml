@@ -55,6 +55,8 @@
     <dimen name="add_product_header_image_height">250dp</dimen>
     <dimen name="add_update_product_icon_padding">16dp</dimen>
     <dimen name="no_data_found_textSize">20sp</dimen>
+    <dimen name="welcome_textSize">18sp</dimen>
+    <dimen name="welcome_healthy_recommendations_textSize">14sp</dimen>
     <dimen name="item_list_marginTop">16dp</dimen>
     <dimen name="item_list_padding">10dp</dimen>
     <dimen name="item_image_padding">2dp</dimen>

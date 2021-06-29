@@ -32,6 +32,8 @@ class AddProductActivity : BaseActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_product)
 
+        setupActionBar()
+
         iv_add_update_product.setOnClickListener(this)
         btn_submit_add_product.setOnClickListener(this)
     }
@@ -116,6 +118,7 @@ class AddProductActivity : BaseActivity(), View.OnClickListener {
         val product = Product(
             FirestoreClass().getCurrentUserID(),
             username,
+            et_store.text.toString().trim { it <= ' '},
             et_product_title.text.toString().trim { it <= ' '},
             et_product_price.text.toString().trim { it <= ' '},
             et_product_description.text.toString().trim { it <= ' '},

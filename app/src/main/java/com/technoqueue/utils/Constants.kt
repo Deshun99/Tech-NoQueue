@@ -57,6 +57,8 @@ object Constants {
     const val STORE: String = "store"
     const val TITLE: String = "title"
     const val DESCRIPTION: String = "description"
+    const val TO_PREPARE: String = "To be prepared"
+    const val STATUS: String = "status"
 
     fun showImageChooser(activity: Activity) {
 

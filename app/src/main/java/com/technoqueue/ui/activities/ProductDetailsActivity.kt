@@ -70,6 +70,7 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
             FirestoreClass().getCurrentUserID(),
             mProductOwnerId,
             mProductId,
+            mProductDetails.store,
             mProductDetails.title,
             mProductDetails.price,
             mProductDetails.image,

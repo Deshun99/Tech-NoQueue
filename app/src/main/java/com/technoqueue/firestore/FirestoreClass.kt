@@ -677,6 +677,7 @@ class FirestoreClass {
 
             val soldProduct = SoldProduct(
                 cart.product_owner_id,
+                cart.store,
                 cart.title,
                 cart.price,
                 cart.cart_quantity,
@@ -684,6 +685,7 @@ class FirestoreClass {
                 order.title,
                 order.order_datetime,
                 order.total_amount,
+                Constants.TO_PREPARE
             )
 
             val documentReference = mFireStore.collection(Constants.SOLD_PRODUCTS)
@@ -910,5 +912,20 @@ class FirestoreClass {
 
                 Log.e("Get Product List", "Error while getting product list.", e)
             }
+    }
+
+    fun getQueueLength(userId: String): String {
+        var count = 0
+        mFireStore.collection(Constants.SOLD_PRODUCTS)
+            .whereEqualTo(Constants.USER_ID, userId)
+            .whereEqualTo(Constants.STATUS, Constants.TO_PREPARE)
+            .get()
+            .addOnSuccessListener { document ->
+                Log.e("Sold Product List", document.documents.toString())
+                for (i in document.documents) {
+                    count++
+                }
+            }
+        return count.toString()
     }
 }
