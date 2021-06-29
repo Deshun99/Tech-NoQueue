@@ -68,15 +68,6 @@ class MyOrderDetailsActivity : AppCompatActivity() {
 
         when {
             diffInHours < 1 -> {
-                tv_order_status.text = resources.getString(R.string.order_status_pending)
-                tv_order_status.setTextColor(
-                    ContextCompat.getColor(
-                        this@MyOrderDetailsActivity,
-                        R.color.colorAccent
-                    )
-                )
-            }
-            diffInHours < 2 -> {
                 tv_order_status.text = resources.getString(R.string.order_status_in_process)
                 tv_order_status.setTextColor(
                     ContextCompat.getColor(
@@ -86,7 +77,7 @@ class MyOrderDetailsActivity : AppCompatActivity() {
                 )
             }
             else -> {
-                tv_order_status.text = resources.getString(R.string.order_status_delivered)
+                tv_order_status.text = "Completed"
                 tv_order_status.setTextColor(
                     ContextCompat.getColor(
                         this@MyOrderDetailsActivity,
