@@ -914,18 +914,23 @@ class FirestoreClass {
             }
     }
 
-    fun getQueueLength(userId: String): String {
-        var count = 0
+    fun getQueueLength(activity: StoreDetailsActivity, userId: String) {
         mFireStore.collection(Constants.SOLD_PRODUCTS)
             .whereEqualTo(Constants.USER_ID, userId)
             .whereEqualTo(Constants.STATUS, Constants.TO_PREPARE)
             .get()
             .addOnSuccessListener { document ->
-                Log.e("Sold Product List", document.documents.toString())
-                for (i in document.documents) {
-                    count++
-                }
+
+                Log.e(activity.javaClass.simpleName, document.documents.toString())
+
+                activity.getQueueLengthSuccess(document.documents.size)
             }
-        return count.toString()
+            .addOnFailureListener { e ->
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while checking the queue length.",
+                    e
+                )
+            }
     }
 }

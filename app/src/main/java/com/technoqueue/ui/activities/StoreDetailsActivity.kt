@@ -101,6 +101,10 @@ class StoreDetailsActivity : BaseActivity(), View.OnClickListener {
 
         tv_store_name.text = store.title
         tv_store_details_description.text = store.description
-        tv_queue_details.text = FirestoreClass().getQueueLength(store.user_id)
+        FirestoreClass().getQueueLength(this@StoreDetailsActivity, store.user_id)
+    }
+
+    fun getQueueLengthSuccess(length: Int) {
+        tv_queue_details.text = length.toString()
     }
 }
