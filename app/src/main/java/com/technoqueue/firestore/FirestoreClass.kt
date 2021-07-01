@@ -770,8 +770,9 @@ class FirestoreClass {
 
                     list.add(soldProduct)
                 }
+                var newList = list.sortedWith(compareBy{it.order_id})
 
-                fragment.successSoldProductsList(list)
+                fragment.successSoldProductsList(ArrayList(newList))
             }
             .addOnFailureListener { e ->
                 fragment.hideProgressDialog()

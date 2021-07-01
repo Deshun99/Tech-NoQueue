@@ -40,8 +40,6 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
 
         setupActionBar()
 
-        btn_add_to_cart.visibility = View.VISIBLE
-
         btn_add_to_cart.setOnClickListener(this)
         btn_go_to_cart.setOnClickListener(this)
 
@@ -134,11 +132,9 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
             )
         }else{
 
-            if (FirestoreClass().getCurrentUserID() == product.user_id) {
-                hideProgressDialog()
-            } else {
-                FirestoreClass().checkIfItemExistInCart(this@ProductDetailsActivity, mProductId)
-            }
+            btn_add_to_cart.visibility = View.VISIBLE
+            FirestoreClass().checkIfItemExistInCart(this@ProductDetailsActivity, mProductId)
+
         }
     }
 
