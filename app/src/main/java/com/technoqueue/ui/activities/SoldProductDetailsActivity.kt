@@ -1,20 +1,31 @@
 package com.technoqueue.ui.activities
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.google.gson.Gson
 import com.technoqueue.R
 import com.technoqueue.firestore.FirestoreClass
 import com.technoqueue.models.SoldProduct
+import com.technoqueue.models.User
+import com.technoqueue.notification.NotificationData
+import com.technoqueue.notification.PushNotification
+import com.technoqueue.notification.RetrofitInstance
 import com.technoqueue.utils.Constants
 import com.technoqueue.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_product_details.*
 import kotlinx.android.synthetic.main.activity_sold_product_details.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
 class SoldProductDetailsActivity : BaseActivity() {
 
+    val TAG = "SoldProduct"
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -38,11 +49,10 @@ class SoldProductDetailsActivity : BaseActivity() {
         btn_complete_order.setOnClickListener {
             updateDetails(productDetails)
             setupUI(productDetails)
+            val title = "Tech-noQueue"
+            val message = productDetails.title + "is ready for collection"
+            FirestoreClass().getToken(this@SoldProductDetailsActivity, productDetails.customer_id, title, message)
         }
-
-
-
-
     }
 
     private fun setupActionBar() {
@@ -80,21 +90,41 @@ class SoldProductDetailsActivity : BaseActivity() {
         tv_sold_product_quantity.text = productDetails.sold_quantity
         
         tv_sold_product_total_amount.text = productDetails.total_amount
-
-
-
     }
 
     fun updateDetails(productDetails: SoldProduct) {
         FirestoreClass().updateID(this, productDetails)
-        FirestoreClass().updateProductDetail(this, productDetails)
+        FirestoreClass().updateSoldProductDetail(this, productDetails)
     }
-
-
-
 
     fun productsUpdatedSuccessfully() {
         Toast.makeText(this@SoldProductDetailsActivity, "Product is completed.", Toast.LENGTH_SHORT)
             .show()
     }
+
+    private fun sendNotification(notification: PushNotification) = CoroutineScope(Dispatchers.IO).launch {
+        try {
+            val response = RetrofitInstance.api.postNotification(notification)
+            if (response.isSuccessful) {
+                Log.d(TAG, "Response: ${Gson().toJson(response)}")
+            } else {
+                Log.e(TAG, response.errorBody().toString())
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, e.toString())
+        }
+    }
+
+    fun getTokenSuccess(user: User, title: String, message: String) {
+        var recipientToken = user.token
+        if(title.isNotEmpty() && message.isNotEmpty() && recipientToken.isNotEmpty()) {
+            PushNotification(
+                NotificationData(title, message),
+                recipientToken
+            ).also {
+                sendNotification(it)
+            }
+        }
+    }
+
 }

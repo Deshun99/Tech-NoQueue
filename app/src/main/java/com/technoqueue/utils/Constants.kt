@@ -9,6 +9,7 @@ import android.webkit.MimeTypeMap
 object Constants {
 
     const val USERS: String = "users"
+    const val TOKEN: String = "token"
     const val CART_ITEMS: String = "cart_items"
     const val ADDRESSES: String = "addresses"
     const val PREFERENCES: String = "Prefs"
@@ -60,6 +61,9 @@ object Constants {
     const val TO_PREPARE: String = "To be prepared"
     const val STATUS: String = "status"
     const val ORDER_ID: String = "order_id"
+    const val BASE_URL = "https://fcm.googleapis.com"
+    const val SERVER_KEY = "AAAA3E3KJmc:APA91bFx5EnPdOSLwMGTR27JDKDL5hBVRvXhOU84J7TwGRiegBIKBnesh8N-pBxsq5XT5b4SHMz29k5_BsENwRAg2HgNbfmRRU4Iw7RDnsANBFMR00LXzjHc-6ETsBb7DI3x4vhS2b0s"
+    const val CONTENT_TYPE = "application/json"
 
     fun showImageChooser(activity: Activity) {
 

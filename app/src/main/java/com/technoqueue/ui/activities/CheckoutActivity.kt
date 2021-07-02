@@ -1,16 +1,19 @@
 package com.technoqueue.ui.activities
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.installations.FirebaseInstallations
 import com.technoqueue.R
 import com.technoqueue.firestore.FirestoreClass
 import com.technoqueue.models.Address
 import com.technoqueue.models.Cart
 import com.technoqueue.models.Order
 import com.technoqueue.models.Product
+import com.technoqueue.notification.FirebaseService
 import com.technoqueue.ui.adapters.CartItemsListAdapter
 import com.technoqueue.utils.Constants
 import kotlinx.android.synthetic.main.activity_checkout.*
@@ -28,6 +31,13 @@ class CheckoutActivity : BaseActivity() {
         setContentView(R.layout.activity_checkout)
 
         setupActionBar()
+
+        FirebaseService.sharedPref = getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
+
+        FirebaseInstallations.getInstance().getToken(true).addOnSuccessListener {
+            FirebaseService.token = it.token
+            FirestoreClass().updateToken(it.token)
+        }
 
         btn_place_order.setOnClickListener {
             placeAnOrder()

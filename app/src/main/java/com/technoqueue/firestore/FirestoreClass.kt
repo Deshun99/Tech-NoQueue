@@ -677,6 +677,7 @@ class FirestoreClass {
 
             val soldProduct = SoldProduct(
                 cart.product_owner_id,
+                cart.user_id,
                 cart.store,
                 cart.title,
                 cart.price,
@@ -955,7 +956,7 @@ class FirestoreClass {
             }
     }
 
-    fun updateProductDetail(activity: SoldProductDetailsActivity, productDetails: SoldProduct) {
+    fun updateSoldProductDetail(activity: SoldProductDetailsActivity, productDetails: SoldProduct) {
         var docRef = mFireStore.collection(Constants.SOLD_PRODUCTS)
             .document(productDetails.id);
 
@@ -969,11 +970,34 @@ class FirestoreClass {
             .addOnFailureListener { e ->
                 Log.e(
                     activity.javaClass.simpleName,
-                    "Error while checking the queue length.",
+                    "Error while updating Sold Product status.",
                     e
                 )
             }
     }
 
+    fun updateToken(token: String) {
+        mFireStore.collection(Constants.USERS)
+            .document(getCurrentUserID())
+            .update(Constants.TOKEN, token)
+    }
 
+    fun getToken(activity: SoldProductDetailsActivity, customer: String, title: String, message: String) {
+        mFireStore.collection(Constants.USERS)
+            .document(customer)
+            .get()
+            .addOnSuccessListener { document ->
+                Log.e("Product List", document.toString())
+
+                val user = document.toObject(User::class.java)!!
+                activity.getTokenSuccess(user, title, message)
+                }
+            .addOnFailureListener { e ->
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while checking the customer token",
+                    e
+                )
+            }
+    }
 }
