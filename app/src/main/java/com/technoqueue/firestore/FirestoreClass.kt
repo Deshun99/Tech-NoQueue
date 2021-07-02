@@ -744,7 +744,9 @@ class FirestoreClass {
                     list.add(orderItem)
                 }
 
-                fragment.populateOrdersListInUI(list)
+                var newList = list.sortedWith(compareBy{it.order_datetime})
+
+                fragment.populateOrdersListInUI(ArrayList(newList.reversed()))
             }
             .addOnFailureListener { e ->
 
@@ -757,6 +759,7 @@ class FirestoreClass {
     fun getSoldProductsList(fragment: SoldProductsFragment) {
         mFireStore.collection(Constants.SOLD_PRODUCTS)
             .whereEqualTo(Constants.USER_ID, getCurrentUserID())
+            .whereEqualTo(Constants.STATUS, Constants.TO_PREPARE)
             .get()
             .addOnSuccessListener { document ->
                 Log.e(fragment.javaClass.simpleName, document.documents.toString())
