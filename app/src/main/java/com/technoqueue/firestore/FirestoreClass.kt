@@ -934,4 +934,43 @@ class FirestoreClass {
                 )
             }
     }
+
+    fun updateID(activity: SoldProductDetailsActivity, productDetails: SoldProduct) {
+
+        mFireStore.collection(Constants.SOLD_PRODUCTS)
+            .document(productDetails.id)
+            .set(productDetails, SetOptions.merge())
+            .addOnSuccessListener {
+                activity.productsUpdatedSuccessfully()
+            }
+            .addOnFailureListener { e ->
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while checking the queue length.",
+                    e
+                )
+            }
+    }
+
+    fun updateProductDetail(activity: SoldProductDetailsActivity, productDetails: SoldProduct) {
+        var docRef = mFireStore.collection(Constants.SOLD_PRODUCTS)
+            .document(productDetails.id);
+
+        val map = HashMap<String, Any>()
+        map.put(Constants.STATUS, "Completed")
+
+        docRef.update(map)
+            .addOnSuccessListener {
+                activity.productsUpdatedSuccessfully()
+            }
+            .addOnFailureListener { e ->
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while checking the queue length.",
+                    e
+                )
+            }
+    }
+
+
 }

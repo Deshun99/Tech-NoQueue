@@ -2,6 +2,7 @@ package com.technoqueue.ui.activities
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import com.technoqueue.R
 import com.technoqueue.firestore.FirestoreClass
 import com.technoqueue.models.SoldProduct
@@ -13,6 +14,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class SoldProductDetailsActivity : BaseActivity() {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -27,14 +29,20 @@ class SoldProductDetailsActivity : BaseActivity() {
                 intent.getParcelableExtra<SoldProduct>(Constants.EXTRA_SOLD_PRODUCT_DETAILS)!!
         }
 
-        setupActionBar()
-
         setupUI(productDetails)
+
+        setupActionBar()
 
         btn_complete_order.visibility = View.VISIBLE
 
         btn_complete_order.setOnClickListener {
+            updateDetails(productDetails)
+            setupUI(productDetails)
         }
+
+
+
+
     }
 
     private fun setupActionBar() {
@@ -72,5 +80,21 @@ class SoldProductDetailsActivity : BaseActivity() {
         tv_sold_product_quantity.text = productDetails.sold_quantity
         
         tv_sold_product_total_amount.text = productDetails.total_amount
+
+
+
+    }
+
+    fun updateDetails(productDetails: SoldProduct) {
+        FirestoreClass().updateID(this, productDetails)
+        FirestoreClass().updateProductDetail(this, productDetails)
+    }
+
+
+
+
+    fun productsUpdatedSuccessfully() {
+        Toast.makeText(this@SoldProductDetailsActivity, "Product is completed.", Toast.LENGTH_SHORT)
+            .show()
     }
 }
