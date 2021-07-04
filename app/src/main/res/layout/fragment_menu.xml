@@ -7,16 +7,31 @@
     android:background="@color/colorOffWhite"
     tools:context=".ui.fragments.MenuFragment">
 
+    <TextView
+        android:id="@+id/tv_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Select a store to view it's menu"
+        android:textAlignment="center"
+        android:textSize="@dimen/welcome_healthy_recommendations_textSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_my_product_items"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
         android:layout_marginBottom="55dp"
+        android:layout_marginTop="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_info" />
 
     <TextView
         android:id="@+id/tv_no_products_found"

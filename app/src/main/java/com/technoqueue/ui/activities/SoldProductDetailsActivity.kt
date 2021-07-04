@@ -5,11 +5,14 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.google.firebase.installations.FirebaseInstallations
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
 import com.technoqueue.R
 import com.technoqueue.firestore.FirestoreClass
 import com.technoqueue.models.SoldProduct
 import com.technoqueue.models.User
+import com.technoqueue.notification.FirebaseService
 import com.technoqueue.notification.NotificationData
 import com.technoqueue.notification.PushNotification
 import com.technoqueue.notification.RetrofitInstance
@@ -49,8 +52,8 @@ class SoldProductDetailsActivity : BaseActivity() {
         btn_complete_order.setOnClickListener {
             updateDetails(productDetails)
             setupUI(productDetails)
-            val title = "Tech-noQueue"
-            val message = productDetails.title + "is ready for collection"
+            val title = productDetails.store
+            val message = productDetails.title + " is ready for collection!"
             FirestoreClass().getToken(this@SoldProductDetailsActivity, productDetails.customer_id, title, message)
         }
     }
@@ -117,6 +120,7 @@ class SoldProductDetailsActivity : BaseActivity() {
 
     fun getTokenSuccess(user: User, title: String, message: String) {
         var recipientToken = user.token
+        Log.i("token", recipientToken)
         if(title.isNotEmpty() && message.isNotEmpty() && recipientToken.isNotEmpty()) {
             PushNotification(
                 NotificationData(title, message),
@@ -126,5 +130,4 @@ class SoldProductDetailsActivity : BaseActivity() {
             }
         }
     }
-
 }
