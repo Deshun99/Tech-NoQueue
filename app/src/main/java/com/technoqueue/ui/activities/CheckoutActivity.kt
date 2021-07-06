@@ -37,7 +37,6 @@ class CheckoutActivity : BaseActivity() {
         FirebaseService.sharedPref = getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
 
         FirebaseMessaging.getInstance().getToken().addOnSuccessListener { token ->
-            Log.i("test", token)
             FirebaseService.token = token
             FirestoreClass().updateToken(token)
         }
