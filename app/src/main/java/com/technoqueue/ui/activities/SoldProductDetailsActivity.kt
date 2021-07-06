@@ -55,6 +55,7 @@ class SoldProductDetailsActivity : BaseActivity() {
             val title = productDetails.store
             val message = productDetails.title + " is ready for collection!"
             FirestoreClass().getToken(this@SoldProductDetailsActivity, productDetails.customer_id, title, message)
+            finish()
         }
     }
 
