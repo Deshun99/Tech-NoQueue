@@ -120,19 +120,19 @@ class AddProductActivity : BaseActivity(), View.OnClickListener {
     }
 
     fun successStoreName(store: Store, username:String, productType: String) {
-        val product = Product(
-            FirestoreClass().getCurrentUserID(),
-            username,
-            store.title,
-            et_product_title.text.toString().trim { it <= ' '},
-            et_product_price.text.toString().trim { it <= ' '},
-            et_product_description.text.toString().trim { it <= ' '},
-            et_product_quantity.text.toString().trim { it <= ' '},
-            mProductImageURL,
-            productType
-        )
+            val product = Product(
+                FirestoreClass().getCurrentUserID(),
+                username,
+                store.title,
+                et_product_title.text.toString().trim { it <= ' '},
+                et_product_price.text.toString().trim { it <= ' '},
+                et_product_description.text.toString().trim { it <= ' '},
+                et_product_quantity.text.toString().trim { it <= ' '},
+                mProductImageURL,
+                productType
+            )
 
-        FirestoreClass().uploadProductDetails(this,product)
+            FirestoreClass().uploadProductDetails(this,product)
     }
 
     override fun onRequestPermissionsResult(

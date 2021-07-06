@@ -3,6 +3,7 @@ package com.technoqueue.ui.fragments
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.technoqueue.R
 import com.technoqueue.firestore.FirestoreClass
@@ -22,42 +23,6 @@ class MenuFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
-
-    /*
-    fun deleteProduct(productID: String) {
-        showAlertDialogToDeleteProduct(productID)
-    }
-
-    fun productDeleteSuccess() {
-        hideProgressDialog()
-
-        Toast.makeText(
-            requireActivity(),
-            resources.getString(R.string.product_delete_success_message),
-            Toast.LENGTH_SHORT
-        ).show()
-
-        getProductListFromFireStore()
-    }
-
-    fun successProductsListFromFireStore(productsList: ArrayList<Product>) {
-        hideProgressDialog()
-
-        if (productsList.size > 0) {
-            rv_my_product_items.visibility = View.VISIBLE
-            tv_no_products_found.visibility = View.GONE
-
-
-            rv_my_product_items.layoutManager = LinearLayoutManager(activity)
-            rv_my_product_items.setHasFixedSize(true)
-            val adapterProducts = MyProductsListAdapter(requireActivity(), productsList, this)
-            rv_my_product_items.adapter = adapterProducts
-        } else {
-            rv_my_product_items.visibility = View.GONE
-            tv_no_products_found.visibility = View.VISIBLE
-        }
-    }
-     */
 
     fun successStoreListFromFireStore(storeList: ArrayList<Store>) {
         hideProgressDialog()
@@ -162,8 +127,9 @@ class MenuFragment : BaseFragment() {
 
             R.id.action_add_product -> {
 
-                startActivity(Intent(activity, AddProductActivity::class.java))
+                FirestoreClass().checkStoreCreated(this@MenuFragment)
                 return true
+
             }
 
             R.id.action_edit_storefront -> {
@@ -173,6 +139,18 @@ class MenuFragment : BaseFragment() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun checkStoreCreatedSuccess(size: Int) {
+        if (size != 0) {
+            startActivity(Intent(activity, AddProductActivity::class.java))
+        } else {
+            Toast.makeText(
+                activity,
+                "Please set up your store before adding products",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
     fun verifyExistingStore(storeList: ArrayList<Store>): Boolean {

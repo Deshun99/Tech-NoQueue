@@ -1026,4 +1026,22 @@ class FirestoreClass {
                 )
             }
     }
+
+    fun checkStoreCreated(fragment: MenuFragment) {
+        mFireStore.collection(Constants.STORES)
+            .whereEqualTo(Constants.USER_ID, getCurrentUserID())
+            .get()
+            .addOnSuccessListener { document ->
+                Log.e(fragment.javaClass.simpleName, document.documents.toString())
+
+                fragment.checkStoreCreatedSuccess(document.documents.size)
+            }
+            .addOnFailureListener { e ->
+                Log.e(
+                    fragment.javaClass.simpleName,
+                    "Error while checking if store is created.",
+                    e
+                )
+            }
+    }
 }

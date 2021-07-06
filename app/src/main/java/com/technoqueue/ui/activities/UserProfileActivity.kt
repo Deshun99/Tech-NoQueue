@@ -244,8 +244,12 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
             Toast.LENGTH_SHORT
         ).show()
 
-        startActivity(Intent(this@UserProfileActivity, DashboardActivity::class.java))
-        finish()
+        if (mUserDetails.accountType == Constants.CUSTOMER) {
+            startActivity(Intent(this@UserProfileActivity, DashboardActivity::class.java))
+            finish()
+        } else {
+            startActivity(Intent(this@UserProfileActivity, AddEditStoreActivity::class.java))
+        }
     }
 
     fun imageUploadSuccess(imageURL: String) {
