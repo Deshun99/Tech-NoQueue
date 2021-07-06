@@ -3,10 +3,12 @@ package com.technoqueue.ui.activities
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.installations.FirebaseInstallations
+import com.google.firebase.messaging.FirebaseMessaging
 import com.technoqueue.R
 import com.technoqueue.firestore.FirestoreClass
 import com.technoqueue.models.Address
@@ -34,9 +36,10 @@ class CheckoutActivity : BaseActivity() {
 
         FirebaseService.sharedPref = getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
 
-        FirebaseInstallations.getInstance().getToken(true).addOnSuccessListener {
-            FirebaseService.token = it.token
-            FirestoreClass().updateToken(it.token)
+        FirebaseMessaging.getInstance().getToken().addOnSuccessListener { token ->
+            Log.i("test", token)
+            FirebaseService.token = token
+            FirestoreClass().updateToken(token)
         }
 
         btn_place_order.setOnClickListener {
