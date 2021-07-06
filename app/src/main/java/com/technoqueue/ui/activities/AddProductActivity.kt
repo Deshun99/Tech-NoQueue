@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat
 import com.technoqueue.R
 import com.technoqueue.firestore.FirestoreClass
 import com.technoqueue.models.Product
+import com.technoqueue.models.Store
 import com.technoqueue.utils.Constants
 import com.technoqueue.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_add_product.*
@@ -115,10 +116,14 @@ class AddProductActivity : BaseActivity(), View.OnClickListener {
             Constants.HEALTHIER
         }
 
+        FirestoreClass().getStoreName(this@AddProductActivity, username, productType)
+    }
+
+    fun successStoreName(store: Store, username:String, productType: String) {
         val product = Product(
             FirestoreClass().getCurrentUserID(),
             username,
-            et_store.text.toString().trim { it <= ' '},
+            store.title,
             et_product_title.text.toString().trim { it <= ' '},
             et_product_price.text.toString().trim { it <= ' '},
             et_product_description.text.toString().trim { it <= ' '},
@@ -128,7 +133,6 @@ class AddProductActivity : BaseActivity(), View.OnClickListener {
         )
 
         FirestoreClass().uploadProductDetails(this,product)
-
     }
 
     override fun onRequestPermissionsResult(

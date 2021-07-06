@@ -1000,4 +1000,30 @@ class FirestoreClass {
                 )
             }
     }
+
+    fun getStoreName(activity: AddProductActivity, username: String, productType: String) {
+        mFireStore.collection(Constants.STORES)
+            .whereEqualTo(Constants.USER_ID, getCurrentUserID())
+            .get()
+            .addOnSuccessListener { document ->
+
+                val list: ArrayList<Store> = ArrayList()
+
+                for (i in document.documents) {
+
+                    val store = i.toObject(Store::class.java)!!
+
+                    list.add(store)
+                }
+
+                activity.successStoreName(list[0], username, productType)
+            }
+            .addOnFailureListener { e ->
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while getting the store name.",
+                    e
+                )
+            }
+    }
 }

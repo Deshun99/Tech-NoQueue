@@ -205,6 +205,11 @@ class AddEditStoreActivity : BaseActivity(), View.OnClickListener {
 
     private fun validateStoreDetails(): Boolean {
         return when {
+            mSelectedImageFileURI == null -> {
+                showErrorSnackBar(resources.getString(R.string.err_msg_select_product_image), true)
+                false
+            }
+
             TextUtils.isEmpty(et_store_title.text.toString().trim { it <= ' ' }) -> {
                 showErrorSnackBar(resources.getString(R.string.err_msg_enter_store_title), true)
                 false
