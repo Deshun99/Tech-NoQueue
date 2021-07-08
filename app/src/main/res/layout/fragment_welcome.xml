@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorOffWhite"
-    tools:context=".ui.fragments.WelcomeFragment">
+    tools:context=".ui.fragments.WelcomeFragment"
+    android:id="@+id/welcome_fragments">
 
     <TextView
         android:id="@+id/tv_welcome"

@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorOffWhite"
-    tools:context=".ui.fragments.SoldProductsFragment">
+    tools:context=".ui.fragments.SoldProductsFragment"
+    android:id="@+id/sold_products_fragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_sold_product_items"
