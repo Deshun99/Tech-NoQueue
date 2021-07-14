@@ -17,7 +17,7 @@ import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import androidx.test.espresso.contrib.RecyclerViewActions
+
 
 @RunWith(AndroidJUnit4ClassRunner::class)
 class WelcomeFragmentTest {
@@ -32,6 +32,7 @@ class WelcomeFragmentTest {
 
         onView(withId(R.id.welcome_fragments)).check(matches(isDisplayed()))
 
+        /*
         Thread.sleep(2000)
         onView(withId(R.id.rv_dashboard_items))
             .perform(
@@ -40,6 +41,8 @@ class WelcomeFragmentTest {
                     click()
                 )
             )
+
+         */
     }
 
 }

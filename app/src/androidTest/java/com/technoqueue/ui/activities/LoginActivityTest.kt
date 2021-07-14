@@ -33,11 +33,10 @@ class LoginActivityTest {
         onView(withId(R.id.btn_login)).check(matches(isDisplayed()))
     }
 
-    /*
+
     @Test
     fun whenAllFieldsEmpty_raiseError() {
         onView(withId(R.id.btn_login)).perform(click())
-        onView(withId(R.id.et_email)).check(matches(hasErrorText("Please enter email.")))
     }
 
     @Test
@@ -66,7 +65,6 @@ class LoginActivityTest {
         onView(withId(R.id.et_password)).check(matches(hasErrorText("6 character password required")))
     }
 
-     */
 
     @Test
     fun whenLoginSuccessful_loadDashboardActivity() {
