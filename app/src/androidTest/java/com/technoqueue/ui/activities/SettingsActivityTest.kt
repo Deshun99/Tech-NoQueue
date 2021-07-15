@@ -18,6 +18,9 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 
+/*
+For this test to be run successfully, the user need to be logged in
+ */
 @RunWith(AndroidJUnit4ClassRunner::class)
 class SettingsActivityTest {
 
@@ -26,27 +29,42 @@ class SettingsActivityTest {
     val rule: ActivityTestRule<SettingsActivity> = ActivityTestRule(SettingsActivity::class.java)
 
 
-    private fun setupNavigation() {
+    @Test
+    fun setupNavigation() {
         onView(withId(R.id.tv_edit)).perform(click())
         onView(withId(R.id.toolbar_user_profile_activity)).check(matches(isDisplayed()))
     }
 
     @Test
-    fun testEditing() {
-        setupNavigation()
+    fun logout() {
+        onView(withId(R.id.btn_logout)).perform(click())
         Thread.sleep(2500)
+        onView(withId(R.id.tv_title)).check(matches(isDisplayed()))
+        onView(withId(R.id.til_email)).check(matches(isDisplayed()))
+        onView(withId(R.id.til_password)).check(matches(isDisplayed()))
+        onView(withId(R.id.tv_forgot_password)).check(matches(isDisplayed()))
+        onView(withId(R.id.btn_login)).check(matches(isDisplayed()))
+    }
 
-        onView(withId(R.id.et_first_name)).perform(typeText("John Wix"), closeSoftKeyboard())
+    @Test
+    fun editProfile() {
+        onView(withId(R.id.tv_edit)).perform(click())
 
-        onView(withId(R.id.et_last_name)).perform(typeText("bin Santino D'Antonio"), closeSoftKeyboard())
+        onView(withId(R.id.toolbar_user_profile_activity)).check(matches(isDisplayed()))
 
-        //onView(withId(R.id.et_email)).perform(typeText("santiano@antonio.com"), closeSoftKeyboard())
+        onView(withId(R.id.et_first_name)).perform(
+            clearText() ,
+            typeText("John Wix"), closeSoftKeyboard())
 
-        onView(withId(R.id.et_mobile_number)).perform(typeText("96969696"), closeSoftKeyboard())
+        onView(withId(R.id.et_last_name)).perform(clearText(), typeText("bin Santino D'Antonio"), closeSoftKeyboard())
+
+        onView(withId(R.id.et_mobile_number)).perform(clearText(), typeText("96969696"), closeSoftKeyboard())
 
         onView(withId(R.id.btn_submit)).perform(click())
         Thread.sleep(2500)
-        onView(withId(R.id.toolbar_settings_activity)).check(matches(isDisplayed()))
+
     }
+
+
 
 }
