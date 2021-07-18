@@ -125,18 +125,7 @@ class MenuFragmentTest {
                     click()
                 )
             )
-
         runStuff()
-
-
-
-
-
-
-
-        //onView(withId(R.id.scrollView2)).check(matches(isDisplayed()))
-
-
     }
 
     private fun runStuff() {

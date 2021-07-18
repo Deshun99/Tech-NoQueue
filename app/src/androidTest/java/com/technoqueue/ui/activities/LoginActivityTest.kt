@@ -11,6 +11,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import androidx.annotation.StringRes
+import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.matcher.RootMatchers.isDialog
 import androidx.test.espresso.matcher.ViewMatchers.*
@@ -29,45 +30,55 @@ class LoginActivityTest {
     val rule: ActivityTestRule<LoginActivity> = ActivityTestRule(LoginActivity::class.java)
 
     @Test
-    fun mainActivityLoadsCorrectly() {
-        onView(withId(R.id.btn_login)).check(matches(isDisplayed()))
-    }
-
-
-    @Test
-    fun whenAllFieldsEmpty_raiseError() {
+    fun whenEmailAndPasswordIsEmpty() {
+        val activityScenario = ActivityScenario.launch(LoginActivity::class.java)
         onView(withId(R.id.btn_login)).perform(click())
+        onView(hasErrorText("Please enter email."))
     }
 
     @Test
-    fun whenEmailIsInvalid_raiseError() {
+    fun whenEmailIsEmpty() {
+        val activityScenario = ActivityScenario.launch(LoginActivity::class.java)
+        onView(withId(R.id.et_password)).perform(typeText("111111"), closeSoftKeyboard())
+        onView(withId(R.id.btn_login)).perform(click())
+        onView(hasErrorText("Please enter email."))
+    }
+
+    @Test
+    fun whenEmailIsInvalid() {
+        val activityScenario = ActivityScenario.launch(LoginActivity::class.java)
         onView(withId(R.id.et_email))
-            .perform(typeText("test7"), closeSoftKeyboard())
+            .perform(typeText("gehkiang@actsmart.com"))
+        onView(withId(R.id.et_password)).perform(typeText("111111"), closeSoftKeyboard())
         onView(withId(R.id.btn_login)).perform(click())
-        onView(withId(R.id.et_email)).check(matches(hasErrorText("Valid Email Required")))
+        onView(hasErrorText("There is no user record corresponding to this identifier. The user" +
+                " may have been deleted."))
     }
 
     @Test
-    fun whenPasswordIsEmpty_raiseError() {
+    fun whenPasswordIsWrong() {
+        val activityScenario = ActivityScenario.launch(LoginActivity::class.java)
         onView(withId(R.id.et_email))
-            .perform(typeText("test7@gmail.com"), closeSoftKeyboard())
+            .perform(typeText("john@wick.com"))
+        onView(withId(R.id.et_password)).perform(typeText("222222"), closeSoftKeyboard())
         onView(withId(R.id.btn_login)).perform(click())
-        onView(withId(R.id.et_password)).check(matches(hasErrorText("Please enter password.")))
+        onView(hasErrorText("The password is invalid or the user does not have a password."))
     }
 
     @Test
-    fun whenPasswordIsTooShort_raiseError() {
+    fun whenPasswordIsEmpty() {
+        val activityScenario = ActivityScenario.launch(LoginActivity::class.java)
         onView(withId(R.id.et_email))
-            .perform(typeText("test7@gmail.com"), closeSoftKeyboard())
-        onView(withId(R.id.et_password))
-            .perform(typeText("123"), closeSoftKeyboard())
+            .perform(typeText("john@wick.com"), closeSoftKeyboard())
         onView(withId(R.id.btn_login)).perform(click())
-        onView(withId(R.id.et_password)).check(matches(hasErrorText("6 character password required")))
+        onView(hasErrorText("Please enter password."))
     }
+
 
 
     @Test
     fun whenLoginSuccessful_loadDashboardActivity() {
+        val activityScenario = ActivityScenario.launch(LoginActivity::class.java)
         onView(withId(R.id.et_email))
             .perform(typeText("john@wick.com"), closeSoftKeyboard())
         onView(withId(R.id.et_password))
@@ -76,19 +87,9 @@ class LoginActivityTest {
         // TODO: USE IDLING RESOURCES INSTEAD OF MANUALLY WAITING
         // NOTE: IF IT FAILS, CONSIDER HIGHER WAITING TIME
         Thread.sleep(2500)
-        onView(withId(R.id.action_settings)).perform(click())
-        //onView(withId(R.id.dashboard_username)).check(matches(isDisplayed()))
-        logout()
+
     }
 
-    @Test
-    fun whenLoginUnsuccessful_errorToastIsShown() {
-        // TODO: NEED TO FIND A WAY TO ASSERT TOAST MESSAGES
-    }
-
-    private fun logout() {
-        onView(withId(R.id.btn_logout)).perform(click())
-    }
 
     // For getting the string value of R.string.something
     private fun getString(@StringRes resourceId: Int): String {
