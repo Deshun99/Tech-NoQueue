@@ -31,42 +31,26 @@ class RegisterActivityTest {
     fun incorrectEmailFormat() {
 
         val activityScenario = ActivityScenario.launch(RegisterActivity::class.java)
-
         onView(withId(R.id.et_first_name)).perform(typeText("Sng"))
-
         onView(withId(R.id.et_last_name)).perform(typeText("Boon Joon"))
-
         onView(withId(R.id.et_email)).perform(typeText("sngboonjoon"))
-
         onView(withId(R.id.et_password)).perform(typeText("111111"))
-
         onView(withId(R.id.et_confirm_password)).perform(typeText("111111"), closeSoftKeyboard())
-
         onView(withId(R.id.cb_terms_and_condition)).perform(click())
-
         onView(withId(R.id.btn_register)).perform(click())
-
         onView(hasErrorText("The email address is badly formatted."))
     }
 
     @Test
     fun passwordLessThan6Characters() {
         val activityScenario = ActivityScenario.launch(RegisterActivity::class.java)
-
         onView(withId(R.id.et_first_name)).perform(typeText("Sng"))
-
         onView(withId(R.id.et_last_name)).perform(typeText("Boon Joon"))
-
         onView(withId(R.id.et_email)).perform(typeText("sngboonjoon@gmail.com"))
-
         onView(withId(R.id.et_password)).perform(typeText("1111"))
-
         onView(withId(R.id.et_confirm_password)).perform(typeText("1111"), closeSoftKeyboard())
-
         onView(withId(R.id.cb_terms_and_condition)).perform(click())
-
         onView(withId(R.id.btn_register)).perform(click())
-
         onView(hasErrorText("The given password is invalid. [ Password should be at least " +
                 "6 characters ]"))
     }
@@ -74,78 +58,49 @@ class RegisterActivityTest {
     @Test
     fun passwordDoesNotMatch() {
         val activityScenario = ActivityScenario.launch(RegisterActivity::class.java)
-
         onView(withId(R.id.et_first_name)).perform(typeText("Sng"))
-
         onView(withId(R.id.et_last_name)).perform(typeText("Boon Joon"))
-
         onView(withId(R.id.et_email)).perform(typeText("sngboonjoon@gmail.com"))
-
         onView(withId(R.id.et_password)).perform(typeText("111"))
-
         onView(withId(R.id.et_confirm_password)).perform(typeText("1111"), closeSoftKeyboard())
-
         onView(withId(R.id.cb_terms_and_condition)).perform(click())
-
         onView(withId(R.id.btn_register)).perform(click())
-
         onView(hasErrorText("Password and confirm password does not match."))
     }
 
     @Test
     fun missingTermsAndCondition() {
         val activityScenario = ActivityScenario.launch(RegisterActivity::class.java)
-
         onView(withId(R.id.et_first_name)).perform(typeText("Sng"))
-
         onView(withId(R.id.et_last_name)).perform(typeText("Boon Joon"))
-
         onView(withId(R.id.et_email)).perform(typeText("sngboonjoon@gmail.com"))
-
         onView(withId(R.id.et_password)).perform(typeText("111111"))
-
         onView(withId(R.id.et_confirm_password)).perform(typeText("111111"), closeSoftKeyboard())
-
         onView(withId(R.id.btn_register)).perform(click())
-
         onView(hasErrorText("Please agree terms and condition."))
     }
 
     @Test
     fun missingFirstName() {
         val activityScenario = ActivityScenario.launch(RegisterActivity::class.java)
-
         onView(withId(R.id.et_last_name)).perform(typeText("Boon Joon"))
-
         onView(withId(R.id.et_email)).perform(typeText("sngboonjoon@gmail.com"))
-
         onView(withId(R.id.et_password)).perform(typeText("111111"))
-
         onView(withId(R.id.et_confirm_password)).perform(typeText("111111"), closeSoftKeyboard())
-
         onView(withId(R.id.cb_terms_and_condition)).perform(click())
-
         onView(withId(R.id.btn_register)).perform(click())
-
         onView(hasErrorText("Please enter first name."))
     }
 
     @Test
     fun missingLastName() {
         val activityScenario = ActivityScenario.launch(RegisterActivity::class.java)
-
         onView(withId(R.id.et_last_name)).perform(typeText("Boon Joon"))
-
         onView(withId(R.id.et_email)).perform(typeText("sngboonjoon@gmail.com"))
-
         onView(withId(R.id.et_password)).perform(typeText("111111"))
-
         onView(withId(R.id.et_confirm_password)).perform(typeText("111111"), closeSoftKeyboard())
-
         onView(withId(R.id.cb_terms_and_condition)).perform(click())
-
         onView(withId(R.id.btn_register)).perform(click())
-
         onView(hasErrorText("Please enter last name."))
     }
 }
