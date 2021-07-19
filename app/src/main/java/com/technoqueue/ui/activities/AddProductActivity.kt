@@ -196,6 +196,12 @@ class AddProductActivity : BaseActivity(), View.OnClickListener {
                 showErrorSnackBar(resources.getString(R.string.err_msg_enter_product_description), true)
                 false
             }
+
+            TextUtils.isEmpty(et_product_quantity.text.toString().trim { it <= ' ' }) -> {
+                showErrorSnackBar(resources.getString(R.string.err_msg_enter_product_quantity), true)
+                false
+            }
+
             else -> {
                 true
             }
