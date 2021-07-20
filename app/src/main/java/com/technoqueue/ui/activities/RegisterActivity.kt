@@ -82,10 +82,6 @@ class RegisterActivity : BaseActivity() {
                 showErrorSnackBar(resources.getString(R.string.err_msg_password_and_confirm_password_mismatch), true)
                 false
             }
-            !cb_terms_and_condition.isChecked -> {
-                showErrorSnackBar(resources.getString(R.string.err_msg_agree_terms_and_condition), true)
-                false
-            }
             else -> {
                 true
             }
